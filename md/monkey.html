@@ -98,17 +98,19 @@
 <li>安装测试 APP： <code class="language-markup">adb install package.apk</code> </li>
 <li>获取 APP 包名：进入 Shell  <code class="language-markup">adb shell</code> ，筛选日志输出  <code class="language-markup">logcat | grep Displayed</code>  or  <code class="language-markup">adb logcat | findstr START</code> </li>
 <li>给指定包打压力： <code class="language-markup">adb shell monkey -vvv --throttle 500 -p io.github.liushilive.at 1000 &gt; monkey.txt 2&gt;&amp;1</code> </li>
-<li>提取 CRASH 的 Exception 信息：崩溃、闪退<ol>
-<li>查看 seed 值</li>
-<li>重现</li>
-</ol>
-</li>
-<li><p>提取 ANR 的 Exception 信息：未响应</p>
+<li><p>分析日志</p>
 <ol>
+<li>程序无响应的情况：搜索关键字  <code class="language-markup">ANR</code> <ol>
 <li>进入 adb shell： <code class="language-markup">adb shell</code> </li>
 <li>进入 anr 目录： <code class="language-markup">cd data/anr</code> </li>
 <li>查看  <code class="language-markup">traces.txt</code> </li>
 <li>提取  <code class="language-markup">traces.txt</code>  文件： <code class="language-markup">adb pull /data/anr/traces.txt</code> </li>
+</ol>
+</li>
+<li>崩溃、闪退的情况 1：搜索关键字  <code class="language-markup">CRASH</code> </li>
+<li>崩溃、闪退的情况 2：搜索关键字  <code class="language-markup">Exception</code> </li>
+<li>内存溢出的情况：搜索关键字  <code class="language-markup">OOM</code> </li>
+<li>测试成功的情况：搜索关键字  <code class="language-markup">Monkey finished</code> </li>
 </ol>
 </li>
 <li><p>重现： <code class="language-markup">adb shell monkey -p io.github.liushilive.at -vvv -s 1546458727792 1000 &gt; monkey1.txt 2&gt;&amp;1</code></p>
