@@ -69,12 +69,15 @@
 <p>Android 调试桥 ( <code class="language-markup">adb</code> ) 是多种用途的工具，该工具可以帮助你管理设备或模拟器的状态。</p>
 <p>该工具作为一个客户端 - 服务器程序，包括三个组件：</p>
 <ul>
-<li>客户端，该组件发送命令。
-客户端在开发计算机上运行。可以通过发出  <code class="language-markup">adb</code>  命令从命令行终端调用客户端。</li>
-<li>后台程序，该组件在设备上运行命令。
-后台程序是每个模拟器或设备实例上作为后台进程运行的守护程序 (daemon)。</li>
-<li>服务器，该组件管理客户端和后台程序之间的通信。
-服务器在开发计算机上作为后台进程运行。该服务器负责管理客户端与运行于模拟器或设备上的  <code class="language-markup">adb 守护程序</code>  (daemon) 之间的通信。</li>
+<li><p>客户端，该组件发送命令。
+客户端在开发计算机上运行。可以通过发出  <code class="language-markup">adb</code>  命令从命令行终端调用客户端。</p>
+</li>
+<li><p>后台程序，该组件在设备上运行命令。
+后台程序是每个模拟器或设备实例上作为后台进程运行的守护程序 (daemon)。</p>
+</li>
+<li><p>服务器，该组件管理客户端和后台程序之间的通信。
+服务器在开发计算机上作为后台进程运行。该服务器负责管理客户端与运行于模拟器或设备上的  <code class="language-markup">adb 守护程序</code>  (daemon) 之间的通信。</p>
+</li>
 </ul>
 <p>可以在  <code class="language-markup">android_sdk/platform-tools/</code>  中找到  <code class="language-markup">adb</code>  工具。</p>
 <blockquote><p>建议将该路径加入  <code class="language-markup">PATH</code>  环境变量中</p>
@@ -91,16 +94,20 @@
 <p>一旦服务器与所有模拟器实例建立连接，就可以使用  <code class="language-markup">adb</code>  命令控制和访问该实例。因为服务器管理  <code class="language-markup">模拟器 / 设备实例</code> 的连接，和控制处理从来自多个  <code class="language-markup">adb</code>  客户端来的命令，你可以通过任何客户端（或脚本）来控制任何模拟器或设备实例。</p>
 <h2 id="anchor_3"><a name="anchor_3" class="anchor-navigation-ex-anchor" href="#anchor_3"><i class="fa fa-link" aria-hidden="true"></i></a>2. 在你的设备上启用 adb 调试</h2><p>要在通过 USB 连接的设备上使用  <code class="language-markup">adb</code> ，必须在设备系统设置中启用  <code class="language-markup">USB 调试</code> （位于  <code class="language-markup">开发者选项</code>  下）。</p>
 <ol>
-<li>在运行 Android 4.2 及更高版本的设备上， <code class="language-markup">开发者选项</code>  屏幕默认情况下处于隐藏状态。</li>
-<li>如需将其显示出来，请转到  <code class="language-markup">设置</code>  &gt;  <code class="language-markup">关于手机</code>  并点按  <code class="language-markup">软件版本号</code>  七次。</li>
-<li>返回上一屏幕，在底部可以找到  <code class="language-markup">开发者选项</code> 。</li>
-<li>在某些设备上， <code class="language-markup">开发者选项</code>  屏幕所在的位置或命名方式可能有所不同。</li>
+<li><p>在运行 Android 4.2 及更高版本的设备上， <code class="language-markup">开发者选项</code>  屏幕默认情况下处于隐藏状态。</p>
+</li>
+<li><p>如需将其显示出来，请转到  <code class="language-markup">设置</code>  &gt;  <code class="language-markup">关于手机</code>  并点按  <code class="language-markup">软件版本号</code>  七次。</p>
+</li>
+<li><p>返回上一屏幕，在底部可以找到  <code class="language-markup">开发者选项</code> 。</p>
+</li>
+<li><p>在某些设备上， <code class="language-markup">开发者选项</code>  屏幕所在的位置或命名方式可能有所不同。</p>
+</li>
 </ol>
 <p>现在，可以将设备与 USB 连接。可以从  <code class="language-markup">android_sdk/platform-tools/</code>  目录执行  <code class="language-markup">adb devices</code>  来验证设备是否连接。如果已连接，将看到设备名称以  <code class="language-markup">设备</code>  形式列示。</p>
 <blockquote><p>注：当连接运行 Android 4.2.2 或更高版本的设备时，系统将显示一个对话框，询问  <code class="language-markup">你是否接受允许在这台计算机上调试</code>  的 RSA 密钥。这种安全机制可以保护用户设备，因为它可以确保只有在你能够解锁设备并确认对话框的情况下才能执行 USB 调试和其他  <code class="language-markup">ADB</code>  命令。</p>
 </blockquote>
 <h2 id="anchor_4"><a name="anchor_4" class="anchor-navigation-ex-anchor" href="#anchor_4"><i class="fa fa-link" aria-hidden="true"></i></a>3. 基本用法</h2><h3 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>3.1. 命令语法</h3><p>adb 命令的基本语法如下：</p>
-<pre class="line-numbers"><code class="lang-sh">adb [-d|-e|-s &lt;serialNumber&gt;] &lt;command&gt;
+<pre class="line-numbers"><code class="lang-bash">adb [-d|-e|-s &lt;serialNumber&gt;] &lt;command&gt;
 </code></pre>
 <p>如果只有一个设备 / 模拟器连接时，可以省略掉  <code class="language-markup">[-d|-e|-s &lt;serialNumber&gt;]</code>  这一部分，直接使用  <code class="language-markup">adb &lt;command&gt;</code> 。</p>
 <h3 id="anchor_6"><a name="anchor_6" class="anchor-navigation-ex-anchor" href="#anchor_6"><i class="fa fa-link" aria-hidden="true"></i></a>3.2. 为命令指定目标设备</h3><p>如果有多个设备 / 模拟器连接，则需要为命令指定目标设备。</p>
@@ -126,7 +133,7 @@
 </tbody>
 </table>
 <p>在多个设备 / 模拟器连接的情况下较常用的是  <code class="language-markup">-s &lt;serialNumber&gt;</code>  参数，serialNumber 可以通过  <code class="language-markup">adb devices</code>  命令获取。如：</p>
-<pre class="line-numbers"><code class="lang-sh">&gt; adb devices
+<pre class="line-numbers"><code class="lang-bash">&gt; adb devices
 
 List of devices attached
 cf264b8f  device
@@ -135,47 +142,47 @@ emulator-5554  device
 </code></pre>
 <p>输出里的  <code class="language-markup">cf264b8f</code> 、 <code class="language-markup">emulator-5554</code>  和  <code class="language-markup">10.129.164.6:5555</code>  即为 serialNumber。</p>
 <p>比如这时想指定  <code class="language-markup">cf264b8f</code>  这个设备来运行 adb 命令获取屏幕分辨率：</p>
-<pre class="line-numbers"><code class="lang-sh">adb -s cf264b8f shell wm size
+<pre class="line-numbers"><code class="lang-bash">adb -s cf264b8f shell wm size
 </code></pre>
 <p>又如想给  <code class="language-markup">10.129.164.6:5555</code>  这个设备安装应用（<em>这种形式的 serialNumber 格式为  <code class="language-markup">&lt;IP&gt;:&lt;Port&gt;</code> ，一般为无线连接的设备或 Genymotion 等第三方 Android 模拟器</em>）：</p>
-<pre class="line-numbers"><code class="lang-sh">adb -s 10.129.164.6:5555 install test.apk
+<pre class="line-numbers"><code class="lang-bash">adb -s 10.129.164.6:5555 install test.apk
 </code></pre>
 <blockquote><p>遇到多设备 / 模拟器的情况均使用这几个参数为命令指定目标设备，下文中为简化描述，不再重复。</p>
 </blockquote>
 <h3 id="anchor_7"><a name="anchor_7" class="anchor-navigation-ex-anchor" href="#anchor_7"><i class="fa fa-link" aria-hidden="true"></i></a>3.3. 启动 / 停止</h3><p>启动 adb server 命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb start-server
+<pre class="line-numbers"><code class="lang-bash">adb start-server
 </code></pre>
 <p>（一般无需手动执行此命令，在运行 adb 命令时若发现 adb server 没有启动会自动调起。）</p>
 <p>停止 adb server 命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb kill-server
+<pre class="line-numbers"><code class="lang-bash">adb kill-server
 </code></pre>
 <h3 id="anchor_8"><a name="anchor_8" class="anchor-navigation-ex-anchor" href="#anchor_8"><i class="fa fa-link" aria-hidden="true"></i></a>3.4. 查看 adb 版本</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb version
+<pre class="line-numbers"><code class="lang-bash">adb version
 </code></pre>
 <p>示例输出：</p>
-<pre class="line-numbers"><code class="lang-sh">Android Debug Bridge version 1.0.36
+<pre class="line-numbers"><code class="lang-bash">Android Debug Bridge version 1.0.36
 Revision 8f855a3d9b35-android
 </code></pre>
 <h3 id="anchor_9"><a name="anchor_9" class="anchor-navigation-ex-anchor" href="#anchor_9"><i class="fa fa-link" aria-hidden="true"></i></a>3.5. 以 root 权限运行 adb</h3><p>adb 的运行原理是 PC 端的 adb server 与手机端的守护进程 adb 建立连接，然后 PC 端的 adb client 通过 adb server 转发命令，adb 接收命令后解析运行。</p>
 <p>所以如果 adb 以普通权限执行，有些需要 root 权限才能执行的命令无法直接用  <code class="language-markup">adb xxx</code>  执行。这时可以  <code class="language-markup">adb shell</code>  然后  <code class="language-markup">su</code>  后执行命令，也可以让 adb 以 root 权限执行，这个就能随意执行高权限命令了。</p>
 <p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb root
+<pre class="line-numbers"><code class="lang-bash">adb root
 </code></pre>
 <p>正常输出：</p>
-<pre class="line-numbers"><code class="lang-sh">restarting adb as root
+<pre class="line-numbers"><code class="lang-bash">restarting adb as root
 </code></pre>
 <p>现在再运行  <code class="language-markup">adb shell</code> ，看看命令行提示符是不是变成  <code class="language-markup">#</code>  了？</p>
 <p>有些手机 root 后也无法通过  <code class="language-markup">adb root</code>  命令让 adb 以 root 权限执行，比如三星的部分机型，会提示  <code class="language-markup">adb cannot run as root in production builds</code> ，此时可以先安装 adb Insecure，然后  <code class="language-markup">adb root</code>  试试。</p>
 <p>相应地，如果要恢复 adb 为非 root 权限的话，可以使用  <code class="language-markup">adb unroot</code>  命令。</p>
 <h3 id="anchor_10"><a name="anchor_10" class="anchor-navigation-ex-anchor" href="#anchor_10"><i class="fa fa-link" aria-hidden="true"></i></a>3.6. 指定 adb server 的网络端口</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb -P &lt;port&gt; start-server
+<pre class="line-numbers"><code class="lang-bash">adb -P &lt;port&gt; start-server
 </code></pre>
 <p>默认端口为 5037。</p>
 <h2 id="anchor_11"><a name="anchor_11" class="anchor-navigation-ex-anchor" href="#anchor_11"><i class="fa fa-link" aria-hidden="true"></i></a>4. 设备连接管理</h2><h3 id="anchor_12"><a name="anchor_12" class="anchor-navigation-ex-anchor" href="#anchor_12"><i class="fa fa-link" aria-hidden="true"></i></a>4.1. 查询已连接设备 / 模拟器</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb devices
+<pre class="line-numbers"><code class="lang-bash">adb devices
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">List of devices attached
+<pre class="line-numbers"><code class="lang-bash">List of devices attached
 cf264b8f  device
 emulator-5554  device
 10.129.164.6:5555  device
@@ -193,11 +200,11 @@ emulator-5554  device
 <p>常见异常输出：</p>
 <ol>
 <li><p>没有设备 / 模拟器连接成功。</p>
-<pre class="line-numbers"><code class="lang-sh">List of devices attached
+<pre class="line-numbers"><code class="lang-bash">List of devices attached
 </code></pre>
 </li>
 <li><p>设备 / 模拟器未连接到 adb 或无响应。</p>
-<pre class="line-numbers"><code class="lang-sh">List of devices attached
+<pre class="line-numbers"><code class="lang-bash">List of devices attached
 cf264b8f  offline
 </code></pre>
 </li>
@@ -215,10 +222,10 @@ cf264b8f  offline
 <p>这一点貌似在 Linux 和 Mac OS X 下不用操心，在 Windows 下有可能遇到需要安装驱动的情况，确认这一点可以右键「计算机」-「属性」，到「设备管理器」里查看相关设备上是否有黄色感叹号或问号，如果没有就说明驱动状态已经好了。否则可以下载一个手机助手类程序来安装驱动先。</p>
 </li>
 <li><p>通过 USB 线连接好电脑和设备后确认状态。</p>
-<pre class="line-numbers"><code class="lang-sh">adb devices
+<pre class="line-numbers"><code class="lang-bash">adb devices
 </code></pre>
 <p>如果能看到</p>
-<pre class="line-numbers"><code class="lang-sh">xxxxxx device
+<pre class="line-numbers"><code class="lang-bash">xxxxxx device
 </code></pre>
 <p>说明连接成功。</p>
 </li>
@@ -232,7 +239,7 @@ cf264b8f  offline
 <p>应确保连接成功（可运行  <code class="language-markup">adb devices</code>  看是否能列出该设备）。</p>
 </li>
 <li><p>让设备在 5555 端口监听 TCP/IP 连接：</p>
-<pre class="line-numbers"><code class="lang-sh">adb tcpip 5555
+<pre class="line-numbers"><code class="lang-bash">adb tcpip 5555
 </code></pre>
 </li>
 <li><p>断开 USB 连接。</p>
@@ -241,15 +248,15 @@ cf264b8f  offline
 <p>一般能在「设置」-「关于手机」-「状态信息」-「IP地址」找到，也可以使用下文里 查看设备信息 - IP 地址 一节里的方法用 adb 命令来查看。</p>
 </li>
 <li><p>通过 IP 地址连接设备。</p>
-<pre class="line-numbers"><code class="lang-sh">adb connect &lt;device-ip-address&gt;
+<pre class="line-numbers"><code class="lang-bash">adb connect &lt;device-ip-address&gt;
 </code></pre>
 <p>这里的  <code class="language-markup">&lt;device-ip-address&gt;</code>  就是上一步中找到的设备 IP 地址。</p>
 </li>
 <li><p>确认连接状态。</p>
-<pre class="line-numbers"><code class="lang-sh">adb devices
+<pre class="line-numbers"><code class="lang-bash">adb devices
 </code></pre>
 <p>如果能看到</p>
-<pre class="line-numbers"><code class="lang-sh">&lt;device-ip-address&gt;:5555 device
+<pre class="line-numbers"><code class="lang-bash">&lt;device-ip-address&gt;:5555 device
 </code></pre>
 <p>说明连接成功。</p>
 </li>
@@ -259,10 +266,10 @@ cf264b8f  offline
 <blockquote><p>断开无线连接</p>
 </blockquote>
 <p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb disconnect &lt;device-ip-address&gt;
+<pre class="line-numbers"><code class="lang-bash">adb disconnect &lt;device-ip-address&gt;
 </code></pre>
 <h2 id="anchor_15"><a name="anchor_15" class="anchor-navigation-ex-anchor" href="#anchor_15"><i class="fa fa-link" aria-hidden="true"></i></a>5. 应用管理</h2><h3 id="anchor_16"><a name="anchor_16" class="anchor-navigation-ex-anchor" href="#anchor_16"><i class="fa fa-link" aria-hidden="true"></i></a>5.1. 查看应用列表</h3><p>查看应用列表的基本命令格式是</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell pm list packages [-f] [-d] [-e] [-s] [-3] [-i] [-u] [--user USER_ID] [FILTER]
+<pre class="line-numbers"><code class="lang-bash">adb shell pm list packages [-f] [-d] [-e] [-s] [-3] [-i] [-u] [--user USER_ID] [FILTER]
 </code></pre>
 <p>即在  <code class="language-markup">adb shell pm list packages</code>  的基础上可以加一些参数进行过滤查看不同的列表，支持的过滤参数如下：</p>
 <table>
@@ -311,10 +318,10 @@ cf264b8f  offline
 </tbody>
 </table>
 <h4 id="anchor_17"><a name="anchor_17" class="anchor-navigation-ex-anchor" href="#anchor_17"><i class="fa fa-link" aria-hidden="true"></i></a>所有应用</h4><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell pm list packages
+<pre class="line-numbers"><code class="lang-bash">adb shell pm list packages
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">package:com.android.smoketest
+<pre class="line-numbers"><code class="lang-bash">package:com.android.smoketest
 package:com.example.android.livecubes
 package:com.android.providers.telephony
 package:com.google.android.googlequicksearchbox
@@ -329,19 +336,19 @@ package:com.android.externalstorage
 ...
 </code></pre>
 <h4 id="anchor_18"><a name="anchor_18" class="anchor-navigation-ex-anchor" href="#anchor_18"><i class="fa fa-link" aria-hidden="true"></i></a>系统应用</h4><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell pm list packages -s
+<pre class="line-numbers"><code class="lang-bash">adb shell pm list packages -s
 </code></pre>
 <h4 id="anchor_19"><a name="anchor_19" class="anchor-navigation-ex-anchor" href="#anchor_19"><i class="fa fa-link" aria-hidden="true"></i></a>第三方应用</h4><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell pm list packages -3
+<pre class="line-numbers"><code class="lang-bash">adb shell pm list packages -3
 </code></pre>
 <h4 id="anchor_20"><a name="anchor_20" class="anchor-navigation-ex-anchor" href="#anchor_20"><i class="fa fa-link" aria-hidden="true"></i></a>包名包含某字符串的应用</h4><p>比如要查看包名包含字符串  <code class="language-markup">mazhuang</code>  的应用列表，命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell pm list packages mazhuang
+<pre class="line-numbers"><code class="lang-bash">adb shell pm list packages mazhuang
 </code></pre>
 <p>当然也可以使用 grep 来过滤：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell pm list packages | grep mazhuang
+<pre class="line-numbers"><code class="lang-bash">adb shell pm list packages | grep mazhuang
 </code></pre>
 <h3 id="anchor_21"><a name="anchor_21" class="anchor-navigation-ex-anchor" href="#anchor_21"><i class="fa fa-link" aria-hidden="true"></i></a>5.2. 安装 APK</h3><p>命令格式：</p>
-<pre class="line-numbers"><code class="lang-sh">adb install [-lrtsdg] &lt;path_to_apk&gt;
+<pre class="line-numbers"><code class="lang-bash">adb install [-lrtsdg] &lt;path_to_apk&gt;
 </code></pre>
 <p>参数：</p>
 <p><code class="language-markup">adb install</code>  后面可以跟一些可选参数来控制安装 APK 的行为，可用参数及含义如下：</p>
@@ -379,18 +386,18 @@ package:com.android.externalstorage
 </tbody>
 </table>
 <p>运行命令后如果见到类似如下输出（状态为  <code class="language-markup">Success</code> ）代表安装成功：</p>
-<pre class="line-numbers"><code class="lang-sh">[100%] /data/local/tmp/1.apk
+<pre class="line-numbers"><code class="lang-bash">[100%] /data/local/tmp/1.apk
   pkg: /data/local/tmp/1.apk
 Success
 </code></pre>
 <p>上面是当前最新版 v1.0.36 的 adb 的输出，会显示 push apk 文件到手机的进度百分比。</p>
 <p>使用旧版本 adb 的输出则是这样的：</p>
-<pre class="line-numbers"><code class="lang-sh">12040 KB/s (22205609 bytes in 1.801s)
+<pre class="line-numbers"><code class="lang-bash">12040 KB/s (22205609 bytes in 1.801s)
         pkg: /data/local/tmp/SogouInput_android_v8.3_sweb.apk
 Success
 </code></pre>
 <p>而如果状态为  <code class="language-markup">Failure</code>  则表示安装失败，比如：</p>
-<pre class="line-numbers"><code class="lang-sh">[100%] /data/local/tmp/map-20160831.apk
+<pre class="line-numbers"><code class="lang-bash">[100%] /data/local/tmp/map-20160831.apk
         pkg: /data/local/tmp/map-20160831.apk
 Failure [INSTALL_FAILED_ALREADY_EXISTS]
 </code></pre>
@@ -683,40 +690,40 @@ Failure [INSTALL_FAILED_ALREADY_EXISTS]
 </ol>
 <p>所以，必要的时候也可以根据这个步骤，手动分步执行安装过程。</p>
 <h3 id="anchor_22"><a name="anchor_22" class="anchor-navigation-ex-anchor" href="#anchor_22"><i class="fa fa-link" aria-hidden="true"></i></a>5.3. 卸载应用</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb uninstall [-k] &lt;packagename&gt;
+<pre class="line-numbers"><code class="lang-bash">adb uninstall [-k] &lt;packagename&gt;
 </code></pre>
 <p><code class="language-markup">&lt;packagename&gt;</code>  表示应用的包名， <code class="language-markup">-k</code>  参数可选，表示卸载应用但保留数据和缓存目录。</p>
 <p>命令示例：</p>
-<pre class="line-numbers"><code class="lang-sh">adb uninstall com.qihoo360.mobilesafe
+<pre class="line-numbers"><code class="lang-bash">adb uninstall com.qihoo360.mobilesafe
 </code></pre>
 <p>表示卸载 360 手机卫士。</p>
 <h3 id="anchor_23"><a name="anchor_23" class="anchor-navigation-ex-anchor" href="#anchor_23"><i class="fa fa-link" aria-hidden="true"></i></a>5.4. 清除应用数据与缓存</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell pm clear &lt;packagename&gt;
+<pre class="line-numbers"><code class="lang-bash">adb shell pm clear &lt;packagename&gt;
 </code></pre>
 <p><code class="language-markup">&lt;packagename&gt;</code>  表示应用名包，这条命令的效果相当于在设置里的应用信息界面点击了「清除缓存」和「清除数据」。</p>
 <p>命令示例：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell pm clear com.qihoo360.mobilesafe
+<pre class="line-numbers"><code class="lang-bash">adb shell pm clear com.qihoo360.mobilesafe
 </code></pre>
 <p>表示清除 360 手机卫士的数据和缓存。</p>
 <h3 id="anchor_24"><a name="anchor_24" class="anchor-navigation-ex-anchor" href="#anchor_24"><i class="fa fa-link" aria-hidden="true"></i></a>5.5. 查看前台 Activity</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell dumpsys activity activities | grep mFocusedActivity
+<pre class="line-numbers"><code class="lang-bash">adb shell dumpsys activity activities | grep mFocusedActivity
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.android.launcher3.Launcher t42}
+<pre class="line-numbers"><code class="lang-bash">mFocusedActivity: ActivityRecord{8079d7e u0 com.cyanogenmod.trebuchet/com.android.launcher3.Launcher t42}
 </code></pre>
 <p>其中的  <code class="language-markup">com.cyanogenmod.trebuchet/com.android.launcher3.Launcher</code>  就是当前处于前台的 Activity。</p>
 <h3 id="anchor_25"><a name="anchor_25" class="anchor-navigation-ex-anchor" href="#anchor_25"><i class="fa fa-link" aria-hidden="true"></i></a>5.6. 查看正在运行的 Services</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell dumpsys activity services [&lt;packagename&gt;]
+<pre class="line-numbers"><code class="lang-bash">adb shell dumpsys activity services [&lt;packagename&gt;]
 </code></pre>
 <p><code class="language-markup">&lt;packagename&gt;</code>  参数不是必须的，指定  <code class="language-markup">&lt;packagename&gt;</code>  表示查看与某个包名相关的 Services，不指定表示查看所有 Services。</p>
 <p><code class="language-markup">&lt;packagename&gt;</code>  不一定要给出完整的包名，比如运行  <code class="language-markup">adb shell dumpsys activity services org.mazhuang</code> ，那么包名  <code class="language-markup">org.mazhuang.demo1</code> 、 <code class="language-markup">org.mazhuang.demo2</code>  和  <code class="language-markup">org.mazhuang123</code>  等相关的 Services 都会列出来。</p>
 <h3 id="anchor_26"><a name="anchor_26" class="anchor-navigation-ex-anchor" href="#anchor_26"><i class="fa fa-link" aria-hidden="true"></i></a>5.7. 查看应用详细信息</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell dumpsys package &lt;packagename&gt;
+<pre class="line-numbers"><code class="lang-bash">adb shell dumpsys package &lt;packagename&gt;
 </code></pre>
 <p>输出中包含很多信息，包括 Activity Resolver Table、Registered ContentProviders、包名、userId、安装后的文件资源代码等路径、版本信息、权限信息和授予状态、签名版本信息等。</p>
 <p><code class="language-markup">&lt;packagename&gt;</code>  表示应用包名。</p>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">Activity Resolver Table:
+<pre class="line-numbers"><code class="lang-bash">Activity Resolver Table:
   Non-Data Actions:
       android.intent.action.MAIN:
         5b4cba8 org.mazhuang.guanggoo/.SplashActivity filter 5ec9dcc
@@ -792,11 +799,11 @@ Dexopt state:
       te]
 </code></pre>
 <h3 id="anchor_27"><a name="anchor_27" class="anchor-navigation-ex-anchor" href="#anchor_27"><i class="fa fa-link" aria-hidden="true"></i></a>5.8. 查看应用安装路径</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell pm path &lt;PACKAGE&gt;
+<pre class="line-numbers"><code class="lang-bash">adb shell pm path &lt;PACKAGE&gt;
 </code></pre>
 <p>输出应用安装路径</p>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell pm path ecarx.weather
+<pre class="line-numbers"><code class="lang-bash">adb shell pm path ecarx.weather
 
 package:/data/app/ecarx.weather-1.apk
 </code></pre>
@@ -901,37 +908,37 @@ package:/data/app/ecarx.weather-1.apk
 </tbody>
 </table>
 <h3 id="anchor_29"><a name="anchor_29" class="anchor-navigation-ex-anchor" href="#anchor_29"><i class="fa fa-link" aria-hidden="true"></i></a>6.1. 启动应用 / 调起 Activity</h3><p>命令格式：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am start [options] &lt;INTENT&gt;
+<pre class="line-numbers"><code class="lang-bash">adb shell am start [options] &lt;INTENT&gt;
 </code></pre>
 <p>例如：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am start -n com.tencent.mm/.ui.LauncherUI
+<pre class="line-numbers"><code class="lang-bash">adb shell am start -n com.tencent.mm/.ui.LauncherUI
 </code></pre>
 <p>表示调起微信主界面。</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am start -n org.mazhuang.boottimemeasure/.MainActivity --es &quot;toast&quot; &quot;hello, world&quot;
+<pre class="line-numbers"><code class="lang-bash">adb shell am start -n org.mazhuang.boottimemeasure/.MainActivity --es &quot;toast&quot; &quot;hello, world&quot;
 </code></pre>
 <p>表示调起  <code class="language-markup">org.mazhuang.boottimemeasure/.MainActivity</code>  并传给它 string 数据键值对  <code class="language-markup">toast - hello, world</code> 。</p>
 <h3 id="anchor_30"><a name="anchor_30" class="anchor-navigation-ex-anchor" href="#anchor_30"><i class="fa fa-link" aria-hidden="true"></i></a>6.2. 调起 Service</h3><p>命令格式：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am startservice [options] &lt;INTENT&gt;
+<pre class="line-numbers"><code class="lang-bash">adb shell am startservice [options] &lt;INTENT&gt;
 </code></pre>
 <p>例如：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am startservice -n com.tencent.mm/.plugin.accountsync.model.AccountAuthenticatorService
+<pre class="line-numbers"><code class="lang-bash">adb shell am startservice -n com.tencent.mm/.plugin.accountsync.model.AccountAuthenticatorService
 </code></pre>
 <p>表示调起微信的某 Service。</p>
 <p>另外一个典型的用例是如果设备上原本应该显示虚拟按键但是没有显示，可以试试这个：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am startservice -n com.android.systemui/.SystemUIService
+<pre class="line-numbers"><code class="lang-bash">adb shell am startservice -n com.android.systemui/.SystemUIService
 </code></pre>
 <h3 id="anchor_31"><a name="anchor_31" class="anchor-navigation-ex-anchor" href="#anchor_31"><i class="fa fa-link" aria-hidden="true"></i></a>6.3. 停止 Service</h3><p>命令格式：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am stopservice [options] &lt;INTENT&gt;
+<pre class="line-numbers"><code class="lang-bash">adb shell am stopservice [options] &lt;INTENT&gt;
 </code></pre>
 <h3 id="anchor_32"><a name="anchor_32" class="anchor-navigation-ex-anchor" href="#anchor_32"><i class="fa fa-link" aria-hidden="true"></i></a>6.4. 发送广播</h3><p>命令格式：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am broadcast [options] &lt;INTENT&gt;
+<pre class="line-numbers"><code class="lang-bash">adb shell am broadcast [options] &lt;INTENT&gt;
 </code></pre>
 <p>可以向所有组件广播，也可以只向指定组件广播。</p>
 <p>例如，向所有组件广播  <code class="language-markup">BOOT_COMPLETED</code> ：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
+<pre class="line-numbers"><code class="lang-bash">adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
 </code></pre>
 <p>又例如，只向  <code class="language-markup">org.mazhuang.boottimemeasure/.BootCompletedReceiver</code>  广播  <code class="language-markup">BOOT_COMPLETED</code> ：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am broadcast -a android.intent.action.BOOT_COMPLETED -n org.mazhuang.boottimemeasure/.BootCompletedReceiver
+<pre class="line-numbers"><code class="lang-bash">adb shell am broadcast -a android.intent.action.BOOT_COMPLETED -n org.mazhuang.boottimemeasure/.BootCompletedReceiver
 </code></pre>
 <p>这类用法在测试的时候很实用，比如某个广播的场景很难制造，可以考虑通过这种方式来发送广播。</p>
 <p>既能发送系统预定义的广播，也能发送自定义广播。如下是部分系统预定义广播及正常触发时机：</p>
@@ -1035,41 +1042,41 @@ package:/data/app/ecarx.weather-1.apk
 <blockquote><p>（以上广播均可使用 adb 触发）</p>
 </blockquote>
 <h3 id="anchor_33"><a name="anchor_33" class="anchor-navigation-ex-anchor" href="#anchor_33"><i class="fa fa-link" aria-hidden="true"></i></a>6.5. 强制停止应用</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am force-stop &lt;packagename&gt;
+<pre class="line-numbers"><code class="lang-bash">adb shell am force-stop &lt;packagename&gt;
 </code></pre>
 <p>命令示例：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am force-stop com.qihoo360.mobilesafe
+<pre class="line-numbers"><code class="lang-bash">adb shell am force-stop com.qihoo360.mobilesafe
 </code></pre>
 <p>表示停止 360 安全卫士的一切进程与服务。</p>
 <h3 id="anchor_34"><a name="anchor_34" class="anchor-navigation-ex-anchor" href="#anchor_34"><i class="fa fa-link" aria-hidden="true"></i></a>6.6. 收紧内存</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am send-trim-memory  &lt;pid&gt; &lt;level&gt;
+<pre class="line-numbers"><code class="lang-bash">adb shell am send-trim-memory  &lt;pid&gt; &lt;level&gt;
 </code></pre>
 <p>pid: 进程 ID
 level:
   HIDDEN、RUNNING_MODERATE、BACKGROUND、
   RUNNING_LOW、MODERATE、RUNNING_CRITICAL、COMPLETE</p>
 <p>命令示例：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell am send-trim-memory 12345 RUNNING_LOW
+<pre class="line-numbers"><code class="lang-bash">adb shell am send-trim-memory 12345 RUNNING_LOW
 </code></pre>
 <p>表示向 pid=12345 的进程，发出 level=RUNNING_LOW 的收紧内存命令。</p>
 <h2 id="anchor_35"><a name="anchor_35" class="anchor-navigation-ex-anchor" href="#anchor_35"><i class="fa fa-link" aria-hidden="true"></i></a>7. 文件管理</h2><h3 id="anchor_36"><a name="anchor_36" class="anchor-navigation-ex-anchor" href="#anchor_36"><i class="fa fa-link" aria-hidden="true"></i></a>7.1. 复制设备里的文件到电脑</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb pull &lt;设备里的文件路径&gt; [电脑上的目录]
+<pre class="line-numbers"><code class="lang-bash">adb pull &lt;设备里的文件路径&gt; [电脑上的目录]
 </code></pre>
 <p>其中  <code class="language-markup">电脑上的目录</code>  参数可以省略，默认复制到当前目录。</p>
 <p>例：</p>
-<pre class="line-numbers"><code class="lang-sh">adb pull /sdcard/sr.mp4 ~/tmp/
+<pre class="line-numbers"><code class="lang-bash">adb pull /sdcard/sr.mp4 ~/tmp/
 </code></pre>
 <p><em>小技巧：</em>设备上的文件路径可能需要 root 权限才能访问，如果你的设备已经 root 过，可以先使用  <code class="language-markup">adb shell</code>  和  <code class="language-markup">su</code>  命令在 adb shell 里获取 root 权限后，先  <code class="language-markup">cp /path/on/device /sdcard/filename</code>  将文件复制到 sdcard，然后  <code class="language-markup">adb pull /sdcard/filename /path/on/pc</code> 。</p>
 <h3 id="anchor_37"><a name="anchor_37" class="anchor-navigation-ex-anchor" href="#anchor_37"><i class="fa fa-link" aria-hidden="true"></i></a>7.2. 复制电脑里的文件到设备</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb push &lt;电脑上的文件路径&gt; &lt;设备里的目录&gt;
+<pre class="line-numbers"><code class="lang-bash">adb push &lt;电脑上的文件路径&gt; &lt;设备里的目录&gt;
 </code></pre>
 <p>例：</p>
-<pre class="line-numbers"><code class="lang-sh">adb push ~/sr.mp4 /sdcard/
+<pre class="line-numbers"><code class="lang-bash">adb push ~/sr.mp4 /sdcard/
 </code></pre>
 <p><em>小技巧：</em>设备上的文件路径普通权限可能无法直接写入，如果你的设备已经 root 过，可以先  <code class="language-markup">adb push /path/on/pc /sdcard/filename</code> ，然后  <code class="language-markup">adb shell</code>  和  <code class="language-markup">su</code>  在 adb shell 里获取 root 权限后， <code class="language-markup">cp /sdcard/filename /path/on/device</code> 。</p>
 <h2 id="anchor_38"><a name="anchor_38" class="anchor-navigation-ex-anchor" href="#anchor_38"><i class="fa fa-link" aria-hidden="true"></i></a>8. 模拟按键 / 输入</h2><p>在  <code class="language-markup">adb shell</code>  里有个很实用的命令叫  <code class="language-markup">input</code> ，通过它可以做一些有趣的事情。</p>
 <p><code class="language-markup">input</code>  命令的完整 help 信息如下：</p>
-<pre class="line-numbers"><code class="lang-sh">Usage: input [&lt;source&gt;] &lt;command&gt; [&lt;arg&gt;...]
+<pre class="line-numbers"><code class="lang-bash">Usage: input [&lt;source&gt;] &lt;command&gt; [&lt;arg&gt;...]
 
 The sources are:
       mouse
@@ -1228,86 +1235,93 @@ The commands and default sources are:
 </table>
 <p>下面是  <code class="language-markup">input</code>  命令的一些用法举例。</p>
 <h3 id="anchor_39"><a name="anchor_39" class="anchor-navigation-ex-anchor" href="#anchor_39"><i class="fa fa-link" aria-hidden="true"></i></a>8.1. 电源键</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 26
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 26
 </code></pre>
 <p>执行效果相当于按电源键。</p>
 <h3 id="anchor_40"><a name="anchor_40" class="anchor-navigation-ex-anchor" href="#anchor_40"><i class="fa fa-link" aria-hidden="true"></i></a>8.2. 菜单键</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 82
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 82
 </code></pre>
 <h3 id="anchor_41"><a name="anchor_41" class="anchor-navigation-ex-anchor" href="#anchor_41"><i class="fa fa-link" aria-hidden="true"></i></a>8.3. HOME 键</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 3
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 3
 </code></pre>
 <h3 id="anchor_42"><a name="anchor_42" class="anchor-navigation-ex-anchor" href="#anchor_42"><i class="fa fa-link" aria-hidden="true"></i></a>8.4. 返回键</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 4
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 4
 </code></pre>
 <h3 id="anchor_43"><a name="anchor_43" class="anchor-navigation-ex-anchor" href="#anchor_43"><i class="fa fa-link" aria-hidden="true"></i></a>8.5. 音量控制</h3><p>增加音量：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 24
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 24
 </code></pre>
 <p>降低音量：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 25
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 25
 </code></pre>
 <p>静音：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 164
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 164
 </code></pre>
 <h3 id="anchor_44"><a name="anchor_44" class="anchor-navigation-ex-anchor" href="#anchor_44"><i class="fa fa-link" aria-hidden="true"></i></a>8.6. 媒体控制</h3><p>播放 / 暂停：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 85
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 85
 </code></pre>
 <p>停止播放：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 86
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 86
 </code></pre>
 <p>播放下一首：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 87
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 87
 </code></pre>
 <p>播放上一首：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 88
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 88
 </code></pre>
 <p>恢复播放：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 126
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 126
 </code></pre>
 <p>暂停播放：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 127
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 127
 </code></pre>
 <h3 id="anchor_45"><a name="anchor_45" class="anchor-navigation-ex-anchor" href="#anchor_45"><i class="fa fa-link" aria-hidden="true"></i></a>8.7. 点亮 / 熄灭屏幕</h3><p>可以通过上文讲述过的模拟电源键来切换点亮和熄灭屏幕，但如果明确地想要点亮或者熄灭屏幕，那可以使用如下方法。</p>
 <p>点亮屏幕：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 224
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 224
 </code></pre>
 <p>熄灭屏幕：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input keyevent 223
+<pre class="line-numbers"><code class="lang-bash">adb shell input keyevent 223
 </code></pre>
 <h3 id="anchor_46"><a name="anchor_46" class="anchor-navigation-ex-anchor" href="#anchor_46"><i class="fa fa-link" aria-hidden="true"></i></a>8.8. 滑动解锁</h3><p>如果锁屏没有密码，是通过滑动手势解锁，那么可以通过  <code class="language-markup">input swipe</code>  来解锁。</p>
 <p>命令（参数以机型 Nexus 5，向上滑动手势解锁举例）：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input swipe 300 1000 300 500
+<pre class="line-numbers"><code class="lang-bash">adb shell input swipe 300 1000 300 500
 </code></pre>
 <p>参数  <code class="language-markup">300 1000 300 500</code>  分别表示 <code class="language-markup">起始点 x 坐标 起始点 y 坐标 结束点 x 坐标 结束点 y 坐标</code> 。</p>
 <h3 id="anchor_47"><a name="anchor_47" class="anchor-navigation-ex-anchor" href="#anchor_47"><i class="fa fa-link" aria-hidden="true"></i></a>8.9. 输入文本</h3><p>在焦点处于某文本框时，可以通过  <code class="language-markup">input</code>  命令来输入文本。</p>
 <p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell input text hello
+<pre class="line-numbers"><code class="lang-bash">adb shell input text hello
 </code></pre>
 <p>现在  <code class="language-markup">hello</code>  出现在文本框了。</p>
 <h2 id="anchor_48"><a name="anchor_48" class="anchor-navigation-ex-anchor" href="#anchor_48"><i class="fa fa-link" aria-hidden="true"></i></a>9. 查看日志</h2><p>Android 系统的日志分为两部分，底层的 Linux 内核日志输出到 /proc/kmsg，Android 的日志输出到 /dev/log。</p>
 <h3 id="anchor_49"><a name="anchor_49" class="anchor-navigation-ex-anchor" href="#anchor_49"><i class="fa fa-link" aria-hidden="true"></i></a>9.1. Android 日志</h3><p>命令格式：</p>
-<pre class="line-numbers"><code class="lang-sh">[adb] logcat [&lt;option&gt;] ... [&lt;filter-spec&gt;] ...
+<pre class="line-numbers"><code class="lang-bash">[adb] logcat [&lt;option&gt;] ... [&lt;filter-spec&gt;] ...
 </code></pre>
 <p>常用用法列举如下：</p>
 <h4 id="anchor_50"><a name="anchor_50" class="anchor-navigation-ex-anchor" href="#anchor_50"><i class="fa fa-link" aria-hidden="true"></i></a>按级别过滤日志</h4><p>Android 的日志分为如下几个优先级（priority）：</p>
 <ul>
-<li>V —— Verbose（最低，输出得最多）</li>
-<li>D —— Debug</li>
-<li>I —— Info</li>
-<li>W —— Warning</li>
-<li>E —— Error</li>
-<li>F —— Fatal</li>
-<li>S —— Silent（最高，啥也不输出）</li>
+<li><p>V —— Verbose（最低，输出得最多）</p>
+</li>
+<li><p>D —— Debug</p>
+</li>
+<li><p>I —— Info</p>
+</li>
+<li><p>W —— Warning</p>
+</li>
+<li><p>E —— Error</p>
+</li>
+<li><p>F —— Fatal</p>
+</li>
+<li><p>S —— Silent（最高，啥也不输出）</p>
+</li>
 </ul>
 <p>按某级别过滤日志则会将该级别及以上的日志输出。</p>
 <p>比如，命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb logcat *:W
+<pre class="line-numbers"><code class="lang-bash">adb logcat *:W
 </code></pre>
 <p>会将 Warning、Error、Fatal 和 Silent 日志输出。</p>
 <p>（<strong>注：</strong> 在 macOS 下需要给  <code class="language-markup">*:W</code>  这样以  <code class="language-markup">*</code>  作为 tag 的参数加双引号，如  <code class="language-markup">adb logcat "*:W"</code> ，不然会报错  <code class="language-markup">no matches found: *:W</code> 。）</p>
 <h4 id="anchor_51"><a name="anchor_51" class="anchor-navigation-ex-anchor" href="#anchor_51"><i class="fa fa-link" aria-hidden="true"></i></a>按 tag 和级别过滤日志</h4><p><code class="language-markup">&lt;filter-spec&gt;</code>  可以由多个  <code class="language-markup">&lt;tag&gt;[:priority]</code>  组成。</p>
 <p>比如，命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb logcat ActivityManager:I MyApp:D *:S
+<pre class="line-numbers"><code class="lang-bash">adb logcat ActivityManager:I MyApp:D *:S
 </code></pre>
 <p>表示输出 tag  <code class="language-markup">ActivityManager</code>  的 Info 以上级别日志，输出 tag  <code class="language-markup">MyApp</code>  的 Debug 以上级别日志，及其它 tag 的 Silent 级别日志（即屏蔽其它 tag 日志）。</p>
 <h4 id="anchor_52"><a name="anchor_52" class="anchor-navigation-ex-anchor" href="#anchor_52"><i class="fa fa-link" aria-hidden="true"></i></a>日志格式</h4><p>可以用  <code class="language-markup">adb logcat -v &lt;format&gt;</code>  选项指定日志输出格式。</p>
@@ -1315,73 +1329,73 @@ The commands and default sources are:
 <ul>
 <li><p>brief</p>
 <p>默认格式。格式为：</p>
-<pre class="line-numbers"><code class="lang-sh">&lt;priority&gt;/&lt;tag&gt;(&lt;pid&gt;): &lt;message&gt;
+<pre class="line-numbers"><code class="lang-bash">&lt;priority&gt;/&lt;tag&gt;(&lt;pid&gt;): &lt;message&gt;
 </code></pre>
 <p>示例：</p>
-<pre class="line-numbers"><code class="lang-sh">D/HeadsetStateMachine( 1785): Disconnected process message: 10, size: 0
+<pre class="line-numbers"><code class="lang-bash">D/HeadsetStateMachine( 1785): Disconnected process message: 10, size: 0
 </code></pre>
 </li>
 <li><p>process</p>
 <p>格式为：</p>
-<pre class="line-numbers"><code class="lang-sh">&lt;priority&gt;(&lt;pid&gt;) &lt;message&gt;
+<pre class="line-numbers"><code class="lang-bash">&lt;priority&gt;(&lt;pid&gt;) &lt;message&gt;
 </code></pre>
 <p>示例：</p>
-<pre class="line-numbers"><code class="lang-sh">D( 1785) Disconnected process message: 10, size: 0  (HeadsetStateMachine)
+<pre class="line-numbers"><code class="lang-bash">D( 1785) Disconnected process message: 10, size: 0  (HeadsetStateMachine)
 </code></pre>
 </li>
 <li><p>tag</p>
 <p>格式为：</p>
-<pre class="line-numbers"><code class="lang-sh">&lt;priority&gt;/&lt;tag&gt;: &lt;message&gt;
+<pre class="line-numbers"><code class="lang-bash">&lt;priority&gt;/&lt;tag&gt;: &lt;message&gt;
 </code></pre>
 <p>示例：</p>
-<pre class="line-numbers"><code class="lang-sh">D/HeadsetStateMachine: Disconnected process message: 10, size: 0
+<pre class="line-numbers"><code class="lang-bash">D/HeadsetStateMachine: Disconnected process message: 10, size: 0
 </code></pre>
 </li>
 <li><p>raw</p>
 <p>格式为：</p>
-<pre class="line-numbers"><code class="lang-sh">&lt;message&gt;
+<pre class="line-numbers"><code class="lang-bash">&lt;message&gt;
 </code></pre>
 <p>示例：</p>
-<pre class="line-numbers"><code class="lang-sh">Disconnected process message: 10, size: 0
+<pre class="line-numbers"><code class="lang-bash">Disconnected process message: 10, size: 0
 </code></pre>
 </li>
 <li><p>time</p>
 <p>格式为：</p>
-<pre class="line-numbers"><code class="lang-sh">&lt;datetime&gt; &lt;priority&gt;/&lt;tag&gt;(&lt;pid&gt;): &lt;message&gt;
+<pre class="line-numbers"><code class="lang-bash">&lt;datetime&gt; &lt;priority&gt;/&lt;tag&gt;(&lt;pid&gt;): &lt;message&gt;
 </code></pre>
 <p>示例：</p>
-<pre class="line-numbers"><code class="lang-sh">08-28 22:39:39.974 D/HeadsetStateMachine( 1785): Disconnected process message: 10, size: 0
+<pre class="line-numbers"><code class="lang-bash">08-28 22:39:39.974 D/HeadsetStateMachine( 1785): Disconnected process message: 10, size: 0
 </code></pre>
 </li>
 <li><p>threadtime</p>
 <p>格式为：</p>
-<pre class="line-numbers"><code class="lang-sh">&lt;datetime&gt; &lt;pid&gt; &lt;tid&gt; &lt;priority&gt; &lt;tag&gt;: &lt;message&gt;
+<pre class="line-numbers"><code class="lang-bash">&lt;datetime&gt; &lt;pid&gt; &lt;tid&gt; &lt;priority&gt; &lt;tag&gt;: &lt;message&gt;
 </code></pre>
 <p>示例：</p>
-<pre class="line-numbers"><code class="lang-sh">08-28 22:39:39.974  1785  1832 D HeadsetStateMachine: Disconnected process message: 10, size: 0
+<pre class="line-numbers"><code class="lang-bash">08-28 22:39:39.974  1785  1832 D HeadsetStateMachine: Disconnected process message: 10, size: 0
 </code></pre>
 </li>
 <li><p>long</p>
 <p>格式为：</p>
-<pre class="line-numbers"><code class="lang-sh">[ &lt;datetime&gt; &lt;pid&gt;:&lt;tid&gt; &lt;priority&gt;/&lt;tag&gt; ]
+<pre class="line-numbers"><code class="lang-bash">[ &lt;datetime&gt; &lt;pid&gt;:&lt;tid&gt; &lt;priority&gt;/&lt;tag&gt; ]
 &lt;message&gt;
 </code></pre>
 <p>示例：</p>
-<pre class="line-numbers"><code class="lang-sh">[ 08-28 22:39:39.974  1785: 1832 D/HeadsetStateMachine ]
+<pre class="line-numbers"><code class="lang-bash">[ 08-28 22:39:39.974  1785: 1832 D/HeadsetStateMachine ]
 Disconnected process message: 10, size: 0
 </code></pre>
 </li>
 </ul>
 <p>指定格式可与上面的过滤同时使用。比如：</p>
-<pre class="line-numbers"><code class="lang-sh">adb logcat -v long ActivityManager:I *:S
+<pre class="line-numbers"><code class="lang-bash">adb logcat -v long ActivityManager:I *:S
 </code></pre>
-<h4 id="anchor_53"><a name="anchor_53" class="anchor-navigation-ex-anchor" href="#anchor_53"><i class="fa fa-link" aria-hidden="true"></i></a>清空日志</h4><pre class="line-numbers"><code class="lang-sh">adb logcat -c
+<h4 id="anchor_53"><a name="anchor_53" class="anchor-navigation-ex-anchor" href="#anchor_53"><i class="fa fa-link" aria-hidden="true"></i></a>清空日志</h4><pre class="line-numbers"><code class="lang-bash">adb logcat -c
 </code></pre>
 <h3 id="anchor_54"><a name="anchor_54" class="anchor-navigation-ex-anchor" href="#anchor_54"><i class="fa fa-link" aria-hidden="true"></i></a>9.2. 内核日志</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell dmesg
+<pre class="line-numbers"><code class="lang-bash">adb shell dmesg
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">&lt;6&gt;[14201.684016] PM: noirq resume of devices complete after 0.982 msecs
+<pre class="line-numbers"><code class="lang-bash">&lt;6&gt;[14201.684016] PM: noirq resume of devices complete after 0.982 msecs
 &lt;6&gt;[14201.685525] PM: early resume of devices complete after 0.838 msecs
 &lt;6&gt;[14201.753642] PM: resume of devices complete after 68.106 msecs
 &lt;4&gt;[14201.755954] Restarting tasks ... done.
@@ -1392,16 +1406,16 @@ Disconnected process message: 10, size: 0
 <p>中括号里的  <code class="language-markup">[14201.684016]</code>  代表内核开始启动后的时间，单位为秒。</p>
 <p>通过内核日志我们可以做一些事情，比如衡量内核启动时间，在系统启动完毕后的内核日志里找到  <code class="language-markup">Freeing init memory</code>  那一行前面的时间就是。</p>
 <h2 id="anchor_55"><a name="anchor_55" class="anchor-navigation-ex-anchor" href="#anchor_55"><i class="fa fa-link" aria-hidden="true"></i></a>10. 查看设备信息</h2><h3 id="anchor_56"><a name="anchor_56" class="anchor-navigation-ex-anchor" href="#anchor_56"><i class="fa fa-link" aria-hidden="true"></i></a>10.1. 型号</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell getprop ro.product.model
+<pre class="line-numbers"><code class="lang-bash">adb shell getprop ro.product.model
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">Nexus 5
+<pre class="line-numbers"><code class="lang-bash">Nexus 5
 </code></pre>
 <h3 id="anchor_57"><a name="anchor_57" class="anchor-navigation-ex-anchor" href="#anchor_57"><i class="fa fa-link" aria-hidden="true"></i></a>10.2. 电池状况</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell dumpsys battery
+<pre class="line-numbers"><code class="lang-bash">adb shell dumpsys battery
 </code></pre>
 <p>输入示例：</p>
-<pre class="line-numbers"><code class="lang-sh">Current Battery Service state:
+<pre class="line-numbers"><code class="lang-bash">Current Battery Service state:
   AC powered: false
   USB powered: true
   Wireless powered: false
@@ -1416,61 +1430,61 @@ Disconnected process message: 10, size: 0
 </code></pre>
 <p>其中  <code class="language-markup">scale</code>  代表最大电量， <code class="language-markup">level</code>  代表当前电量。上面的输出表示还剩下 44% 的电量。</p>
 <h3 id="anchor_58"><a name="anchor_58" class="anchor-navigation-ex-anchor" href="#anchor_58"><i class="fa fa-link" aria-hidden="true"></i></a>10.3. 屏幕分辨率</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell wm size
+<pre class="line-numbers"><code class="lang-bash">adb shell wm size
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">Physical size: 1080x1920
+<pre class="line-numbers"><code class="lang-bash">Physical size: 1080x1920
 </code></pre>
 <p>该设备屏幕分辨率为 1080px * 1920px。</p>
 <p>如果使用命令修改过，那输出可能是：</p>
-<pre class="line-numbers"><code class="lang-sh">Physical size: 1080x1920
+<pre class="line-numbers"><code class="lang-bash">Physical size: 1080x1920
 Override size: 480x1024
 </code></pre>
 <p>表明设备的屏幕分辨率原本是  <code class="language-markup">1080px * 1920px</code> ，当前被修改为  <code class="language-markup">480px * 1024px</code> 。</p>
 <h3 id="anchor_59"><a name="anchor_59" class="anchor-navigation-ex-anchor" href="#anchor_59"><i class="fa fa-link" aria-hidden="true"></i></a>10.4. 输出屏幕密度</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell wm density
+<pre class="line-numbers"><code class="lang-bash">adb shell wm density
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">Physical density: 420
+<pre class="line-numbers"><code class="lang-bash">Physical density: 420
 </code></pre>
 <p>该设备屏幕密度为 420dpi。</p>
 <p>如果使用命令修改过，那输出可能是：</p>
-<pre class="line-numbers"><code class="lang-sh">Physical density: 480
+<pre class="line-numbers"><code class="lang-bash">Physical density: 480
 Override density: 160
 </code></pre>
 <p>表明设备的屏幕密度原来是 480dpi，当前被修改为 160dpi。</p>
 <h3 id="anchor_60"><a name="anchor_60" class="anchor-navigation-ex-anchor" href="#anchor_60"><i class="fa fa-link" aria-hidden="true"></i></a>10.5. 显示屏参数</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell dumpsys window displays
+<pre class="line-numbers"><code class="lang-bash">adb shell dumpsys window displays
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
+<pre class="line-numbers"><code class="lang-bash">WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
   Display: mDisplayId=0
     init=1080x1920 420dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1810x1731
     deferred=false layoutNeeded=false
 </code></pre>
 <p>其中  <code class="language-markup">mDisplayId</code>  为 显示屏编号， <code class="language-markup">init</code>  是初始分辨率和屏幕密度， <code class="language-markup">app</code>  的高度比  <code class="language-markup">init</code>  里的要小，表示屏幕底部有虚拟按键，高度为 1920 - 1794 = 126px 合 42dp。</p>
 <h3 id="anchor_61"><a name="anchor_61" class="anchor-navigation-ex-anchor" href="#anchor_61"><i class="fa fa-link" aria-hidden="true"></i></a>10.6. android_id</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell settings get secure android_id
+<pre class="line-numbers"><code class="lang-bash">adb shell settings get secure android_id
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">51b6be48bac8c569
+<pre class="line-numbers"><code class="lang-bash">51b6be48bac8c569
 </code></pre>
 <h3 id="anchor_62"><a name="anchor_62" class="anchor-navigation-ex-anchor" href="#anchor_62"><i class="fa fa-link" aria-hidden="true"></i></a>10.7. IMEI</h3><p>在 Android 4.4 及以下版本可通过如下命令获取 IMEI：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell dumpsys iphonesubinfo
+<pre class="line-numbers"><code class="lang-bash">adb shell dumpsys iphonesubinfo
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">Phone Subscriber Info:
+<pre class="line-numbers"><code class="lang-bash">Phone Subscriber Info:
   Phone Type = GSM
   Device ID = 860955027785041
 </code></pre>
 <p>其中的  <code class="language-markup">Device ID</code>  就是 IMEI。</p>
 <p>而在 Android 5.0 及以上版本里这个命令输出为空，得通过其它方式获取了（需要 root 权限）：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell
+<pre class="line-numbers"><code class="lang-bash">adb shell
 su
 service call iphonesubinfo 1
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">Result: Parcel(
+<pre class="line-numbers"><code class="lang-bash">Result: Parcel(
   0x00000000: 00000000 0000000f 00360038 00390030 &#39;........8.6.0.9.&#39;
   0x00000010: 00350035 00320030 00370037 00350038 &#39;5.5.0.2.7.7.8.5.&#39;
   0x00000020: 00340030 00000031                   &#39;0.4.1...        &#39;)
@@ -1478,28 +1492,28 @@ service call iphonesubinfo 1
 <p>把里面的有效内容提取出来就是 IMEI 了，比如这里的是  <code class="language-markup">860955027785041</code> 。</p>
 <p>参考：<a href="http://stackoverflow.com/questions/27002663/adb-shell-dumpsys-iphonesubinfo-not-working-since-android-5-0-lollipop">adb shell dumpsys iphonesubinfo not working since Android 5.0 Lollipop</a></p>
 <h3 id="anchor_63"><a name="anchor_63" class="anchor-navigation-ex-anchor" href="#anchor_63"><i class="fa fa-link" aria-hidden="true"></i></a>10.8. Android 系统版本</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell getprop ro.build.version.release
+<pre class="line-numbers"><code class="lang-bash">adb shell getprop ro.build.version.release
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">5.0.2
+<pre class="line-numbers"><code class="lang-bash">5.0.2
 </code></pre>
 <h3 id="anchor_64"><a name="anchor_64" class="anchor-navigation-ex-anchor" href="#anchor_64"><i class="fa fa-link" aria-hidden="true"></i></a>10.9. IP 地址</h3><p>每次想知道设备的 IP 地址的时候都得「设置」-「关于手机」-「状态信息」-「IP 地址」很烦对不对？通过 adb 可以方便地查看。</p>
 <p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell ifconfig | grep Mask
+<pre class="line-numbers"><code class="lang-bash">adb shell ifconfig | grep Mask
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">inet addr:10.130.245.230  Mask:255.255.255.252
+<pre class="line-numbers"><code class="lang-bash">inet addr:10.130.245.230  Mask:255.255.255.252
 inet addr:127.0.0.1  Mask:255.0.0.0
 </code></pre>
 <p>那么  <code class="language-markup">10.130.245.230</code>  就是设备 IP 地址。</p>
 <p>在有的设备上这个命令没有输出，如果设备连着 WiFi，可以使用如下命令来查看局域网 IP：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell ifconfig wlan0
+<pre class="line-numbers"><code class="lang-bash">adb shell ifconfig wlan0
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">wlan0: ip 10.129.160.99 mask 255.255.240.0 flags [up broadcast running multicast]
+<pre class="line-numbers"><code class="lang-bash">wlan0: ip 10.129.160.99 mask 255.255.240.0 flags [up broadcast running multicast]
 </code></pre>
 <p>或</p>
-<pre class="line-numbers"><code class="lang-sh">wlan0     Link encap:UNSPEC
+<pre class="line-numbers"><code class="lang-bash">wlan0     Link encap:UNSPEC
           inet addr:10.129.168.57  Bcast:10.129.175.255  Mask:255.255.240.0
           inet6 addr: fe80::66cc:2eff:fe68:b6b6/64 Scope: Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
@@ -1509,10 +1523,10 @@ inet addr:127.0.0.1  Mask:255.0.0.0
           RX bytes:116266821 TX bytes:8311736
 </code></pre>
 <p>如果以上命令仍然不能得到期望的信息，那可以试试以下命令（部分系统版本里可用）：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell netcfg
+<pre class="line-numbers"><code class="lang-bash">adb shell netcfg
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">wlan0    UP                               10.129.160.99/20  0x00001043 f8:a9:d0:17:42:4d
+<pre class="line-numbers"><code class="lang-bash">wlan0    UP                               10.129.160.99/20  0x00001043 f8:a9:d0:17:42:4d
 lo       UP                                   127.0.0.1/8   0x00000049 00:00:00:00:00:00
 p2p0     UP                                     0.0.0.0/0   0x00001003 fa:a9:d0:17:42:4d
 sit0     DOWN                                   0.0.0.0/0   0x00000080 00:00:00:00:00:00
@@ -1536,17 +1550,17 @@ rev_rmnet1 DOWN                                   0.0.0.0/0   0x00001002 da:d8:e
 </code></pre>
 <p>可以看到网络连接名称、启用状态、IP 地址和 Mac 地址等信息。</p>
 <h3 id="anchor_65"><a name="anchor_65" class="anchor-navigation-ex-anchor" href="#anchor_65"><i class="fa fa-link" aria-hidden="true"></i></a>10.10. Mac 地址</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell cat /sys/class/net/wlan0/address
+<pre class="line-numbers"><code class="lang-bash">adb shell cat /sys/class/net/wlan0/address
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">f8:a9:d0:17:42:4d
+<pre class="line-numbers"><code class="lang-bash">f8:a9:d0:17:42:4d
 </code></pre>
 <p>这查看的是局域网 Mac 地址，移动网络或其它连接的信息可以通过前面的小节「IP 地址」里提到的  <code class="language-markup">adb shell netcfg</code>  命令来查看。</p>
 <h3 id="anchor_66"><a name="anchor_66" class="anchor-navigation-ex-anchor" href="#anchor_66"><i class="fa fa-link" aria-hidden="true"></i></a>10.11. CPU 信息</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell cat /proc/cpuinfo
+<pre class="line-numbers"><code class="lang-bash">adb shell cat /proc/cpuinfo
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">Processor       : ARMv7 Processor rev 0 (v7l)
+<pre class="line-numbers"><code class="lang-bash">Processor       : ARMv7 Processor rev 0 (v7l)
 processor       : 0
 BogoMIPS        : 38.40
 
@@ -1572,10 +1586,10 @@ Serial          : 0000000000000000
 </code></pre>
 <p>这是 Nexus 5 的 CPU 信息，我们从输出里可以看到使用的硬件是  <code class="language-markup">Qualcomm MSM 8974</code> ，processor 的编号是 0 到 3，所以它是四核的，采用的架构是  <code class="language-markup">ARMv7 Processor rev 0 (v71)</code> 。</p>
 <h3 id="anchor_67"><a name="anchor_67" class="anchor-navigation-ex-anchor" href="#anchor_67"><i class="fa fa-link" aria-hidden="true"></i></a>10.12. 内存信息</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell cat /proc/meminfo
+<pre class="line-numbers"><code class="lang-bash">adb shell cat /proc/meminfo
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">MemTotal:        1027424 kB
+<pre class="line-numbers"><code class="lang-bash">MemTotal:        1027424 kB
 MemFree:          486564 kB
 Buffers:           15224 kB
 Cached:            72464 kB
@@ -1615,7 +1629,7 @@ VmallocChunk:     209668 kB
 </code></pre>
 <p>其中， <code class="language-markup">MemTotal</code>  就是设备的总内存， <code class="language-markup">MemFree</code>  是当前空闲内存。</p>
 <h3 id="anchor_68"><a name="anchor_68" class="anchor-navigation-ex-anchor" href="#anchor_68"><i class="fa fa-link" aria-hidden="true"></i></a>10.13. 更多硬件与系统属性</h3><p>设备的更多硬件与系统属性可以通过如下命令查看：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell cat /system/build.prop
+<pre class="line-numbers"><code class="lang-bash">adb shell cat /system/build.prop
 </code></pre>
 <p>这会输出很多信息，包括前面几个小节提到的「型号」和「Android 系统版本」等。</p>
 <p>输出里还包括一些其它有用的信息，它们也可通过  <code class="language-markup">adb shell getprop 《属性名》</code>  命令单独查看，列举一部分属性如下：</p>
@@ -1675,47 +1689,47 @@ VmallocChunk:     209668 kB
 <blockquote><p>节注一：</p>
 </blockquote>
 <p>一些小厂定制的 ROM 可能修改过 CPU 支持的 abi 列表的属性名，如果用  <code class="language-markup">ro.product.cpu.abilist</code>  属性名查找不到，可以这样试试：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell cat /system/build.prop | grep ro.product.cpu.abi
+<pre class="line-numbers"><code class="lang-bash">adb shell cat /system/build.prop | grep ro.product.cpu.abi
 </code></pre>
 <p>示例输出：</p>
-<pre class="line-numbers"><code class="lang-sh">ro.product.cpu.abi=armeabi-v7a
+<pre class="line-numbers"><code class="lang-bash">ro.product.cpu.abi=armeabi-v7a
 ro.product.cpu.abi2=armeabi
 </code></pre>
 <h2 id="anchor_69"><a name="anchor_69" class="anchor-navigation-ex-anchor" href="#anchor_69"><i class="fa fa-link" aria-hidden="true"></i></a>11. 修改设置</h2><p><strong>注：</strong> 修改设置之后，运行恢复命令有可能显示仍然不太正常，可以运行  <code class="language-markup">adb reboot</code>  重启设备，或手动重启。</p>
 <p>修改设置的原理主要是通过 settings 命令修改 /data/data/com.android.providers.settings/databases/settings.db 里存放的设置值。</p>
 <h3 id="anchor_70"><a name="anchor_70" class="anchor-navigation-ex-anchor" href="#anchor_70"><i class="fa fa-link" aria-hidden="true"></i></a>11.1. 分辨率</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell wm size 480x1024
+<pre class="line-numbers"><code class="lang-bash">adb shell wm size 480x1024
 </code></pre>
 <p>表示将分辨率修改为 480px * 1024px。</p>
 <p>恢复原分辨率命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell wm size reset
+<pre class="line-numbers"><code class="lang-bash">adb shell wm size reset
 </code></pre>
 <h3 id="anchor_71"><a name="anchor_71" class="anchor-navigation-ex-anchor" href="#anchor_71"><i class="fa fa-link" aria-hidden="true"></i></a>11.2. 修改屏幕密度</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell wm density 160
+<pre class="line-numbers"><code class="lang-bash">adb shell wm density 160
 </code></pre>
 <p>表示将屏幕密度修改为 160dpi。</p>
 <p>恢复原屏幕密度命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell wm density reset
+<pre class="line-numbers"><code class="lang-bash">adb shell wm density reset
 </code></pre>
 <h3 id="anchor_72"><a name="anchor_72" class="anchor-navigation-ex-anchor" href="#anchor_72"><i class="fa fa-link" aria-hidden="true"></i></a>11.3. 显示区域</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell wm overscan 0,0,0,200
+<pre class="line-numbers"><code class="lang-bash">adb shell wm overscan 0,0,0,200
 </code></pre>
 <p>四个数字分别表示距离左、上、右、下边缘的留白像素，以上命令表示将屏幕底部 200px 留白。</p>
 <p>恢复原显示区域命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell wm overscan reset
+<pre class="line-numbers"><code class="lang-bash">adb shell wm overscan reset
 </code></pre>
 <h3 id="anchor_73"><a name="anchor_73" class="anchor-navigation-ex-anchor" href="#anchor_73"><i class="fa fa-link" aria-hidden="true"></i></a>11.4. 关闭 USB 调试模式</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell settings put global adb_enabled 0
+<pre class="line-numbers"><code class="lang-bash">adb shell settings put global adb_enabled 0
 </code></pre>
 <p>恢复：</p>
 <p>用命令恢复不了了，毕竟关闭了 USB 调试 adb 就连接不上 Android 设备了。</p>
 <p>去设备上手动恢复吧：「设置」-「开发者选项」-「Android 调试」。</p>
 <h3 id="anchor_74"><a name="anchor_74" class="anchor-navigation-ex-anchor" href="#anchor_74"><i class="fa fa-link" aria-hidden="true"></i></a>11.5. 允许 / 禁止访问非 SDK API</h3><p>允许访问非 SDK API：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell settings put global hidden_api_policy_pre_p_apps 1
+<pre class="line-numbers"><code class="lang-bash">adb shell settings put global hidden_api_policy_pre_p_apps 1
 adb shell settings put global hidden_api_policy_p_apps 1
 </code></pre>
 <p>禁止访问非 SDK API：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell settings delete global hidden_api_policy_pre_p_apps
+<pre class="line-numbers"><code class="lang-bash">adb shell settings delete global hidden_api_policy_pre_p_apps
 adb shell settings delete global hidden_api_policy_p_apps
 </code></pre>
 <p>不需要设备获得 Root 权限。</p>
@@ -1747,7 +1761,7 @@ adb shell settings delete global hidden_api_policy_p_apps
 </table>
 <h3 id="anchor_75"><a name="anchor_75" class="anchor-navigation-ex-anchor" href="#anchor_75"><i class="fa fa-link" aria-hidden="true"></i></a>11.6. 状态栏和导航栏的显示隐藏</h3><p>本节所说的相关设置对应 Cyanogenmod 里的「扩展桌面」。</p>
 <p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell settings put global policy_control &lt;key-values&gt;
+<pre class="line-numbers"><code class="lang-bash">adb shell settings put global policy_control &lt;key-values&gt;
 </code></pre>
 <p><code class="language-markup">&lt;key-values&gt;</code>  可由如下几种键及其对应的值组成，格式为  <code class="language-markup">&lt;key1&gt;=&lt;value1&gt;:&lt;key2&gt;=&lt;value2&gt;</code> 。</p>
 <table>
@@ -1802,21 +1816,21 @@ adb shell settings delete global hidden_api_policy_p_apps
 </tbody>
 </table>
 <p>例如：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell settings put global policy_control immersive.full=*
+<pre class="line-numbers"><code class="lang-bash">adb shell settings put global policy_control immersive.full=*
 </code></pre>
 <p>表示设置在所有界面下都同时隐藏状态栏和导航栏。</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell settings put global policy_control immersive.status=com.package1,com.package2:immersive.navigation=apps,-com.package3
+<pre class="line-numbers"><code class="lang-bash">adb shell settings put global policy_control immersive.status=com.package1,com.package2:immersive.navigation=apps,-com.package3
 </code></pre>
 <p>表示设置在包名为  <code class="language-markup">com.package1</code>  和  <code class="language-markup">com.package2</code>  的应用里隐藏状态栏，在除了包名为  <code class="language-markup">com.package3</code>  的所有应用里隐藏导航栏。</p>
 <h2 id="anchor_76"><a name="anchor_76" class="anchor-navigation-ex-anchor" href="#anchor_76"><i class="fa fa-link" aria-hidden="true"></i></a>12. 实用功能</h2><h3 id="anchor_77"><a name="anchor_77" class="anchor-navigation-ex-anchor" href="#anchor_77"><i class="fa fa-link" aria-hidden="true"></i></a>12.1. 屏幕截图</h3><p>截图保存到电脑：</p>
-<pre class="line-numbers"><code class="lang-sh">adb exec-out screencap -p &gt; sc.png
+<pre class="line-numbers"><code class="lang-bash">adb exec-out screencap -p &gt; sc.png
 </code></pre>
 <p>如果 adb 版本较老，无法使用  <code class="language-markup">exec-out</code>  命令，这时候建议更新 adb 版本。无法更新的话可以使用以下麻烦点的办法：</p>
 <p>先截图保存到设备里：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell screencap -p /sdcard/sc.png
+<pre class="line-numbers"><code class="lang-bash">adb shell screencap -p /sdcard/sc.png
 </code></pre>
 <p>然后将 png 文件导出到电脑：</p>
-<pre class="line-numbers"><code class="lang-sh">adb pull /sdcard/sc.png
+<pre class="line-numbers"><code class="lang-bash">adb pull /sdcard/sc.png
 </code></pre>
 <p>可以使用  <code class="language-markup">adb shell screencap -h</code>  查看  <code class="language-markup">screencap</code>  命令的帮助信息，下面是两个有意义的参数及含义：</p>
 <table>
@@ -1840,25 +1854,25 @@ adb shell settings delete global hidden_api_policy_p_apps
 <p>另外一种一行命令截图并保存到电脑的方法：</p>
 <blockquote><p>Linux 和 Windows</p>
 </blockquote>
-<pre class="line-numbers"><code class="lang-sh">adb shell screencap -p | sed &quot;s/\r$//&quot; &gt; sc.png
+<pre class="line-numbers"><code class="lang-bash">adb shell screencap -p | sed &quot;s/\r$//&quot; &gt; sc.png
 </code></pre>
 <blockquote><p>Mac OS X</p>
 </blockquote>
-<pre class="line-numbers"><code class="lang-sh">adb shell screencap -p | gsed &quot;s/\r$//&quot; &gt; sc.png
+<pre class="line-numbers"><code class="lang-bash">adb shell screencap -p | gsed &quot;s/\r$//&quot; &gt; sc.png
 </code></pre>
 <p>这个方法需要用到 gnu sed 命令，在 Linux 下直接就有，在 Windows 下 Git 安装目录的 bin 文件夹下也有。如果确实找不到该命令，可以下载 <a href="http://gnuwin32.sourceforge.net/packages/sed.htm">sed for Windows</a> 并将 sed.exe 所在文件夹添加到 PATH 环境变量里。</p>
 <p>而在 Mac 下使用系统自带的 sed 命令会报错：</p>
-<pre class="line-numbers"><code class="lang-sh">sed: RE error: illegal byte sequence
+<pre class="line-numbers"><code class="lang-bash">sed: RE error: illegal byte sequence
 </code></pre>
 <p>需要安装 gnu-sed，然后使用 gsed 命令：</p>
-<pre class="line-numbers"><code class="lang-sh">brew install gnu-sed
+<pre class="line-numbers"><code class="lang-bash">brew install gnu-sed
 </code></pre>
 <h3 id="anchor_78"><a name="anchor_78" class="anchor-navigation-ex-anchor" href="#anchor_78"><i class="fa fa-link" aria-hidden="true"></i></a>12.2. 录制屏幕</h3><p>录制屏幕以 mp4 格式保存到 /sdcard：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell screenrecord /sdcard/filename.mp4
+<pre class="line-numbers"><code class="lang-bash">adb shell screenrecord /sdcard/filename.mp4
 </code></pre>
 <p>需要停止时按 <kbd>Ctrl-C</kbd>，默认录制时间和最长录制时间都是 180 秒。</p>
 <p>如果需要导出到电脑：</p>
-<pre class="line-numbers"><code class="lang-sh">adb pull /sdcard/filename.mp4
+<pre class="line-numbers"><code class="lang-bash">adb pull /sdcard/filename.mp4
 </code></pre>
 <p>可以使用  <code class="language-markup">adb shell screenrecord --help</code>  查看  <code class="language-markup">screenrecord</code>  命令的帮助信息，下面是常见参数及含义：</p>
 <table>
@@ -1893,16 +1907,16 @@ adb shell settings delete global hidden_api_policy_p_apps
 <ol>
 <li><p>进入 shell 并切换到 root 用户权限。</p>
 <p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell
+<pre class="line-numbers"><code class="lang-bash">adb shell
 su
 </code></pre>
 </li>
 <li><p>查看当前分区挂载情况。</p>
 <p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">mount
+<pre class="line-numbers"><code class="lang-bash">mount
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">rootfs / rootfs ro,relatime 0 0
+<pre class="line-numbers"><code class="lang-bash">rootfs / rootfs ro,relatime 0 0
 tmpfs /dev tmpfs rw,seclabel,nosuid,relatime,mode=755 0 0
 devpts /dev/pts devpts rw,seclabel,relatime,mode=600 0 0
 proc /proc proc rw,relatime 0 0
@@ -1929,12 +1943,12 @@ none /sys/fs/cgroup/freezer cgroup rw,relatime,freezer 0 0
 /dev/fuse /mnt/shell/emulated/0 fuse rw,nosuid,nodev,relatime,user_id=1023,group_id=1023,default_permissions,allow_other 0 0
 </code></pre>
 <p>找到其中我们关注的带 /system 的那一行：</p>
-<pre class="line-numbers"><code class="lang-sh">/dev/block/platform/msm_sdcc.1/by-name/system /system ext4 ro,seclabel,relatime,data=ordered 0 0
+<pre class="line-numbers"><code class="lang-bash">/dev/block/platform/msm_sdcc.1/by-name/system /system ext4 ro,seclabel,relatime,data=ordered 0 0
 </code></pre>
 </li>
 <li><p>重新挂载。</p>
 <p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">mount -o remount,rw -t yaffs2 /dev/block/platform/msm_sdcc.1/by-name/system /system
+<pre class="line-numbers"><code class="lang-bash">mount -o remount,rw -t yaffs2 /dev/block/platform/msm_sdcc.1/by-name/system /system
 </code></pre>
 <p>这里的  <code class="language-markup">/dev/block/platform/msm_sdcc.1/by-name/system</code>  就是我们从上一步的输出里得到的文件路径。</p>
 </li>
@@ -1943,12 +1957,12 @@ none /sys/fs/cgroup/freezer cgroup rw,relatime,freezer 0 0
 <h3 id="anchor_80"><a name="anchor_80" class="anchor-navigation-ex-anchor" href="#anchor_80"><i class="fa fa-link" aria-hidden="true"></i></a>12.4. 查看连接过的 WiFi 密码</h3><blockquote><p>注：需要 root 权限。</p>
 </blockquote>
 <p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell
+<pre class="line-numbers"><code class="lang-bash">adb shell
 su
 cat /data/misc/wifi/*.conf
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">network={
+<pre class="line-numbers"><code class="lang-bash">network={
   ssid=&quot;TP-LINK_9DFC&quot;
   scan_ssid=1
   psk=&quot;123456789&quot;
@@ -1971,22 +1985,22 @@ network={
 <h3 id="anchor_81"><a name="anchor_81" class="anchor-navigation-ex-anchor" href="#anchor_81"><i class="fa fa-link" aria-hidden="true"></i></a>12.5. 设置系统日期和时间</h3><blockquote><p>注：需要 root 权限。</p>
 </blockquote>
 <p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell
+<pre class="line-numbers"><code class="lang-bash">adb shell
 su
 date -s 20160823.131500
 </code></pre>
 <p>表示将系统日期和时间更改为 2016 年 08 月 23 日 13 点 15 分 00 秒。</p>
 <h3 id="anchor_82"><a name="anchor_82" class="anchor-navigation-ex-anchor" href="#anchor_82"><i class="fa fa-link" aria-hidden="true"></i></a>12.6. 重启手机</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb reboot
+<pre class="line-numbers"><code class="lang-bash">adb reboot
 </code></pre>
 <h3 id="anchor_83"><a name="anchor_83" class="anchor-navigation-ex-anchor" href="#anchor_83"><i class="fa fa-link" aria-hidden="true"></i></a>12.7. 检测设备是否已 root</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell
+<pre class="line-numbers"><code class="lang-bash">adb shell
 su
 </code></pre>
 <p>此时命令行提示符是  <code class="language-markup">$</code>  则表示没有 root 权限，是  <code class="language-markup">#</code>  则表示已 root。</p>
 <h3 id="anchor_84"><a name="anchor_84" class="anchor-navigation-ex-anchor" href="#anchor_84"><i class="fa fa-link" aria-hidden="true"></i></a>12.8. 使用 Monkey 进行压力测试</h3><p>Monkey 可以生成伪随机用户事件来模拟单击、触摸、手势等操作，可以对正在开发中的程序进行随机压力测试。</p>
 <p>简单用法：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell monkey -p &lt;packagename&gt; -v 500
+<pre class="line-numbers"><code class="lang-bash">adb shell monkey -p &lt;packagename&gt; -v 500
 </code></pre>
 <p>表示向  <code class="language-markup">&lt;packagename&gt;</code>  指定的应用程序发送 500 个伪随机事件。</p>
 <p>Monkey 的详细用法参考 <a href="https://developer.android.com/studio/test/monkey.html">官方文档</a>。</p>
@@ -1994,29 +2008,29 @@ su
 </blockquote>
 <p>有时需要控制设备的 WiFi 状态，可以用以下指令完成。</p>
 <p>开启 WiFi：</p>
-<pre class="line-numbers"><code class="lang-sh">adb root
+<pre class="line-numbers"><code class="lang-bash">adb root
 adb shell svc wifi enable
 </code></pre>
 <p>关闭 WiFi：</p>
-<pre class="line-numbers"><code class="lang-sh">adb root
+<pre class="line-numbers"><code class="lang-bash">adb root
 adb shell svc wifi disable
 </code></pre>
 <p>若执行成功，输出为空；若未取得 root 权限执行此命令，将执行失败，输出  <code class="language-markup">Killed</code> 。</p>
 <h2 id="anchor_86"><a name="anchor_86" class="anchor-navigation-ex-anchor" href="#anchor_86"><i class="fa fa-link" aria-hidden="true"></i></a>13. 刷机相关命令</h2><h3 id="anchor_87"><a name="anchor_87" class="anchor-navigation-ex-anchor" href="#anchor_87"><i class="fa fa-link" aria-hidden="true"></i></a>13.1. 重启到 Recovery 模式</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb reboot recovery
+<pre class="line-numbers"><code class="lang-bash">adb reboot recovery
 </code></pre>
 <h3 id="anchor_88"><a name="anchor_88" class="anchor-navigation-ex-anchor" href="#anchor_88"><i class="fa fa-link" aria-hidden="true"></i></a>13.2. 从 Recovery 重启到 Android</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb reboot
+<pre class="line-numbers"><code class="lang-bash">adb reboot
 </code></pre>
 <h3 id="anchor_89"><a name="anchor_89" class="anchor-navigation-ex-anchor" href="#anchor_89"><i class="fa fa-link" aria-hidden="true"></i></a>13.3. 重启到 Fastboot 模式</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb reboot bootloader
+<pre class="line-numbers"><code class="lang-bash">adb reboot bootloader
 </code></pre>
 <h3 id="anchor_90"><a name="anchor_90" class="anchor-navigation-ex-anchor" href="#anchor_90"><i class="fa fa-link" aria-hidden="true"></i></a>13.4. 通过 sideload 更新系统</h3><p>如果我们下载了 Android 设备对应的系统更新包到电脑上，那么也可以通过 adb 来完成更新。</p>
 <p>以 Recovery 模式下更新为例：</p>
 <ol>
 <li><p>重启到 Recovery 模式。</p>
 <p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb reboot recovery
+<pre class="line-numbers"><code class="lang-bash">adb reboot recovery
 </code></pre>
 </li>
 <li><p>在设备的 Recovery 界面上操作进入  <code class="language-markup">Apply update</code> - <code class="language-markup">Apply from ADB</code> 。</p>
@@ -2024,32 +2038,32 @@ adb shell svc wifi disable
 </li>
 <li><p>通过 adb 上传和更新系统。</p>
 <p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb sideload &lt;path-to-update.zip&gt;
+<pre class="line-numbers"><code class="lang-bash">adb sideload &lt;path-to-update.zip&gt;
 </code></pre>
 </li>
 </ol>
 <h2 id="anchor_91"><a name="anchor_91" class="anchor-navigation-ex-anchor" href="#anchor_91"><i class="fa fa-link" aria-hidden="true"></i></a>14. 安全相关命令</h2><h3 id="anchor_92"><a name="anchor_92" class="anchor-navigation-ex-anchor" href="#anchor_92"><i class="fa fa-link" aria-hidden="true"></i></a>14.1. 启用 / 禁用 SELinux</h3><p>启用 SELinux</p>
-<pre class="line-numbers"><code class="lang-sh">adb root
+<pre class="line-numbers"><code class="lang-bash">adb root
 adb shell setenforce 1
 </code></pre>
 <p>禁用 SELinux</p>
-<pre class="line-numbers"><code class="lang-sh">adb root
+<pre class="line-numbers"><code class="lang-bash">adb root
 adb shell setenforce 0
 </code></pre>
 <h3 id="anchor_93"><a name="anchor_93" class="anchor-navigation-ex-anchor" href="#anchor_93"><i class="fa fa-link" aria-hidden="true"></i></a>14.2. 启用 / 禁用 dm_verity</h3><p>启用 dm_verity</p>
-<pre class="line-numbers"><code class="lang-sh">adb root
+<pre class="line-numbers"><code class="lang-bash">adb root
 adb enable-verity
 </code></pre>
 <p>禁用 dm_verity</p>
-<pre class="line-numbers"><code class="lang-sh">adb root
+<pre class="line-numbers"><code class="lang-bash">adb root
 adb disable-verity
 </code></pre>
 <h2 id="anchor_94"><a name="anchor_94" class="anchor-navigation-ex-anchor" href="#anchor_94"><i class="fa fa-link" aria-hidden="true"></i></a>15. 更多 adb shell 命令</h2><p>Android 系统是基于 Linux 内核的，所以 Linux 里的很多命令在 Android 里也有相同或类似的实现，在  <code class="language-markup">adb shell</code>  里可以调用。本文档前面的部分内容已经用到了  <code class="language-markup">adb shell</code>  命令。</p>
 <h3 id="anchor_95"><a name="anchor_95" class="anchor-navigation-ex-anchor" href="#anchor_95"><i class="fa fa-link" aria-hidden="true"></i></a>15.1. 查看进程</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell ps
+<pre class="line-numbers"><code class="lang-bash">adb shell ps
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">USER     PID   PPID  VSIZE  RSS     WCHAN    PC        NAME
+<pre class="line-numbers"><code class="lang-bash">USER     PID   PPID  VSIZE  RSS     WCHAN    PC        NAME
 root      1     0     8904   788   ffffffff 00000000 S /init
 root      2     0     0      0     ffffffff 00000000 S kthreadd
 ...
@@ -2085,10 +2099,10 @@ shell     8750  217   10640  740   00000000 b6f28340 R ps
 </tbody>
 </table>
 <h3 id="anchor_96"><a name="anchor_96" class="anchor-navigation-ex-anchor" href="#anchor_96"><i class="fa fa-link" aria-hidden="true"></i></a>15.2. 查看实时资源占用情况</h3><p>命令：</p>
-<pre class="line-numbers"><code class="lang-sh">adb shell top
+<pre class="line-numbers"><code class="lang-bash">adb shell top
 </code></pre>
 <p>输出示例：</p>
-<pre class="line-numbers"><code class="lang-sh">User 0%, System 6%, IOW 0%, IRQ 0%
+<pre class="line-numbers"><code class="lang-bash">User 0%, System 6%, IOW 0%, IRQ 0%
 User 3 + Nice 0 + Sys 21 + Idle 280 + IOW 0 + IRQ 0 + SIRQ 3 = 307
 
   PID PR CPU% S  #THR     VSS     RSS PCY UID      Name
@@ -2154,7 +2168,7 @@ User 3 + Nice 0 + Sys 21 + Idle 280 + IOW 0 + IRQ 0 + SIRQ 3 = 307
 </tbody>
 </table>
 <p><code class="language-markup">top</code>  命令还支持一些命令行参数，详细用法如下：</p>
-<pre class="line-numbers"><code class="lang-sh">Usage: top [ -m max_procs ] [ -n iterations ] [ -d delay ] [ -s sort_column ] [ -t ] [ -h ]
+<pre class="line-numbers"><code class="lang-bash">Usage: top [ -m max_procs ] [ -n iterations ] [ -d delay ] [ -s sort_column ] [ -t ] [ -h ]
     -m num  最多显示多少个进程
     -n num  刷新多少次后退出
     -d num  刷新时间间隔（单位秒，默认值 5）
@@ -2166,13 +2180,13 @@ User 3 + Nice 0 + Sys 21 + Idle 280 + IOW 0 + IRQ 0 + SIRQ 3 = 307
 <ol>
 <li><p><code class="language-markup">adb shell dumpsys package &lt;packagename&gt; | grep userId=</code></p>
 <p>如：</p>
-<pre class="line-numbers"><code class="lang-sh">&gt; adb shell dumpsys package org.mazhuang.guanggoo | grep userId=
+<pre class="line-numbers"><code class="lang-bash">&gt; adb shell dumpsys package org.mazhuang.guanggoo | grep userId=
    userId=10394
 </code></pre>
 </li>
 <li><p>通过 ps 命令找到对应进程的 pid 之后  <code class="language-markup">adb shell cat /proc/&lt;pid&gt;/status | grep Uid</code></p>
 <p>如：</p>
-<pre class="line-numbers"><code class="lang-sh">&gt; adb shell
+<pre class="line-numbers"><code class="lang-bash">&gt; adb shell
 gemini:/ $ ps | grep org.mazhuang.guanggoo
 u0_a394   28635 770   1795812 78736 SyS_epoll_ 0000000000 S org.mazhuang.guanggoo
 gemini:/ $ cat /proc/28635/status | grep Uid
@@ -2246,25 +2260,7 @@ All rights reserved.</span><span class="footer-modification">
 </span> 人次</span></span></footer>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script>
-var _hmt = _hmt || [];
-(function () {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?921ac157b25b6c9fd562a97abf2806a7";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-(function () {
-  var bp = document.createElement('script');
-  var curProtocol = window.location.protocol.split(':')[0];
-  if (curProtocol === 'https') {
-    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-  }
-  else {
-    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-  }
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(bp, s);
-})();
+
 </script>
                     </section>
                 </div>

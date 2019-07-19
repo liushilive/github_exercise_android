@@ -72,16 +72,23 @@
 <h2 id="anchor_2"><a name="anchor_2" class="anchor-navigation-ex-anchor" href="#anchor_2"><i class="fa fa-link" aria-hidden="true"></i></a>1. 概述</h2><p>Monkey 是一个命令行程序，你可以跑在模拟器或者设备上。它发送随机的用户和系统事件，可以对你开发的应用程序进行压力测试。</p>
 <p>Monkey 包含一系列的选项，但可以分解为 4 个主要的类别：</p>
 <ol>
-<li>基本设置选项，例如设置一些事件。</li>
-<li>操作限制，如限制测试某一个单独的包。</li>
-<li>事件类型以及频率。</li>
-<li>调试选项。</li>
+<li><p>基本设置选项，例如设置一些事件。</p>
+</li>
+<li><p>操作限制，如限制测试某一个单独的包。</p>
+</li>
+<li><p>事件类型以及频率。</p>
+</li>
+<li><p>调试选项。</p>
+</li>
 </ol>
 <p>当 Monkey 运行时，它产生的事件被发送给系统。它会监视正在测试系统并寻找三种情况做特殊处理：</p>
 <ol>
-<li>如果你限制 Monkey 在一个或者多个包里运行，如果发现程序试图使用其它包，就对其进行阻塞。</li>
-<li>如果你的程序崩溃或者收到任何无法处理的异常， Monkey 就会停止并且报告错误。</li>
-<li>如果你的程序产生一个程序没有答复的错误， Monkey 会停止并报告错误。</li>
+<li><p>如果你限制 Monkey 在一个或者多个包里运行，如果发现程序试图使用其它包，就对其进行阻塞。</p>
+</li>
+<li><p>如果你的程序崩溃或者收到任何无法处理的异常， Monkey 就会停止并且报告错误。</p>
+</li>
+<li><p>如果你的程序产生一个程序没有答复的错误， Monkey 会停止并报告错误。</p>
+</li>
 </ol>
 <p>根据选项的冗长程度，你可以看到 Monkey 运行时候产生的报告，这个时候事件已经开始产生。</p>
 <h2 id="anchor_3"><a name="anchor_3" class="anchor-navigation-ex-anchor" href="#anchor_3"><i class="fa fa-link" aria-hidden="true"></i></a>2. Monkey 的基本用法</h2><p>你可以通过命令或者脚本启动 Monkey 。因为 Monkey 运行在模拟器 / 设备里。你需要在这些环境的 shell 里启动它，使用时，在每个命令前加上 adb shell。</p>
@@ -93,61 +100,90 @@
 <pre class="line-numbers"><code class="lang-bash">adb shell monkey -p io.github.liushilive.at -v 500
 </code></pre>
 <h2 id="anchor_4"><a name="anchor_4" class="anchor-navigation-ex-anchor" href="#anchor_4"><i class="fa fa-link" aria-hidden="true"></i></a>3. Monkey 压力测试实践</h2><ol>
-<li>在手机 <strong>开发者选项</strong> 中，选中 <strong>USB 调试</strong></li>
-<li>确认手机与电脑连接： <code class="language-markup">adb devices</code> </li>
-<li>安装测试 APP： <code class="language-markup">adb install package.apk</code> </li>
-<li>获取 APP 包名：进入 Shell  <code class="language-markup">adb shell</code> ，筛选日志输出  <code class="language-markup">logcat | grep Displayed</code>  or  <code class="language-markup">adb logcat | findstr START</code> </li>
-<li>给指定包打压力： <code class="language-markup">adb shell monkey -vvv --throttle 500 -p io.github.liushilive.at 1000 &gt; monkey.txt 2&gt;&amp;1</code> </li>
+<li><p>在手机 <strong>开发者选项</strong> 中，选中 <strong>USB 调试</strong></p>
+</li>
+<li><p>确认手机与电脑连接： <code class="language-markup">adb devices</code></p>
+</li>
+<li><p>安装测试 APP： <code class="language-markup">adb install package.apk</code></p>
+</li>
+<li><p>获取 APP 包名：进入 Shell  <code class="language-markup">adb shell</code> ，筛选日志输出  <code class="language-markup">logcat | grep Displayed</code>  or  <code class="language-markup">adb logcat | findstr START</code></p>
+</li>
+<li><p>给指定包打压力： <code class="language-markup">adb shell monkey -vvv --throttle 500 -p io.github.liushilive.at 1000 &gt; monkey.txt 2&gt;&amp;1</code></p>
+</li>
 <li><p>分析日志</p>
 <ol>
-<li>程序无响应的情况：搜索关键字  <code class="language-markup">ANR</code> <ol>
-<li>进入 adb shell： <code class="language-markup">adb shell</code> </li>
-<li>进入 anr 目录： <code class="language-markup">cd data/anr</code> </li>
-<li>查看  <code class="language-markup">traces.txt</code> </li>
-<li>提取  <code class="language-markup">traces.txt</code>  文件： <code class="language-markup">adb pull /data/anr/traces.txt</code> </li>
+<li><p>程序无响应的情况：搜索关键字  <code class="language-markup">ANR</code></p>
+<ol>
+<li><p>进入 adb shell： <code class="language-markup">adb shell</code></p>
+</li>
+<li><p>进入 anr 目录： <code class="language-markup">cd data/anr</code></p>
+</li>
+<li><p>查看  <code class="language-markup">traces.txt</code></p>
+</li>
+<li><p>提取  <code class="language-markup">traces.txt</code>  文件： <code class="language-markup">adb pull /data/anr/traces.txt</code></p>
+</li>
 </ol>
 </li>
-<li>崩溃、闪退的情况 1：搜索关键字  <code class="language-markup">CRASH</code> </li>
-<li>崩溃、闪退的情况 2：搜索关键字  <code class="language-markup">Exception</code> </li>
-<li>内存溢出的情况：搜索关键字  <code class="language-markup">OOM</code> </li>
-<li>测试成功的情况：搜索关键字  <code class="language-markup">Monkey finished</code> </li>
+<li><p>崩溃、闪退的情况 1：搜索关键字  <code class="language-markup">CRASH</code></p>
+</li>
+<li><p>崩溃、闪退的情况 2：搜索关键字  <code class="language-markup">Exception</code></p>
+</li>
+<li><p>内存溢出的情况：搜索关键字  <code class="language-markup">OOM</code></p>
+</li>
+<li><p>测试成功的情况：搜索关键字  <code class="language-markup">Monkey finished</code></p>
+</li>
 </ol>
 </li>
 <li><p>重现： <code class="language-markup">adb shell monkey -p io.github.liushilive.at -vvv -s 1546458727792 1000 &gt; monkey1.txt 2&gt;&amp;1</code></p>
 </li>
 </ol>
 <ul>
-<li>加随机数种子： <code class="language-markup">adb shell monkey -vvv -p com.android.calculator2 -s 100 50</code> </li>
-<li>加延迟： <code class="language-markup">adb shell monkey -vvv -p com.android.calculator2 --throttle 1000 10</code> </li>
-<li>触摸事件： <code class="language-markup">adb shell monkey -vvv -p com.android.calculator2 --pct-touch 100 100</code> </li>
+<li><p>加随机数种子： <code class="language-markup">adb shell monkey -vvv -p com.android.calculator2 -s 100 50</code></p>
+</li>
+<li><p>加延迟： <code class="language-markup">adb shell monkey -vvv -p com.android.calculator2 --throttle 1000 10</code></p>
+</li>
+<li><p>触摸事件： <code class="language-markup">adb shell monkey -vvv -p com.android.calculator2 --pct-touch 100 100</code></p>
+</li>
 </ul>
 <h2 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>4. 日志解析</h2><pre class="line-numbers"><code class="lang-bash">adb shell monkey -vvv -p io.github.liushilive.at --pct-touch 1 --pct-motion 2 --pct-pinchzoom 3 --pct-trackball 4 --pct-rotation 5 --pct-permission 6 --pct-nav 7 --pct-majornav 8 --pct-syskeys 9 --pct-appswitch 10 --pct-flip 11 --pct-anyevent 34 --throttle 100 100 &gt; 1.txt 2&gt;&amp;1
 </code></pre>
 <h3 id="anchor_6"><a name="anchor_6" class="anchor-navigation-ex-anchor" href="#anchor_6"><i class="fa fa-link" aria-hidden="true"></i></a>4.1. 各事件的百分比</h3><ul>
-<li> <code class="language-markup">--pct-touch</code> 
-0：触摸事件百分比（触摸事件是一个在屏幕单一位置的按下 - 抬起事件）</li>
-<li> <code class="language-markup">--pct-motion</code> 
-1：手势事件（手势事件是由一个在屏幕某处的按下事件、一系列的伪随机移动、一个抬起事件组成）即一个滑动操作，但是是直线的，不能拐弯</li>
-<li> <code class="language-markup">--pct-pinchzoom</code> 
-2：二指缩放事件，放大缩小手势操作</li>
-<li> <code class="language-markup">--pct-trackball</code> 
-3：轨迹事件</li>
-<li> <code class="language-markup">--pct-rotation</code> 
-4：屏幕旋转事件</li>
-<li> <code class="language-markup">--pct-permission</code> 
-5: 权限许可事件</li>
-<li> <code class="language-markup">--pct-nav</code> 
-6：基本导航事件</li>
-<li> <code class="language-markup">--pct-majornav</code> 
-7：主要导航事件</li>
-<li> <code class="language-markup">--pct-syskeys</code> 
-8：系统按键事件</li>
-<li> <code class="language-markup">--pct-appswitch</code> 
-9：启动 Activity 事件</li>
-<li> <code class="language-markup">--pct-flip</code> 
-10：键盘事件</li>
-<li> <code class="language-markup">--pct-anyevent</code> 
-11：其他类型事件</li>
+<li><p><code class="language-markup">--pct-touch</code> 
+0：触摸事件百分比（触摸事件是一个在屏幕单一位置的按下 - 抬起事件）</p>
+</li>
+<li><p><code class="language-markup">--pct-motion</code> 
+1：手势事件（手势事件是由一个在屏幕某处的按下事件、一系列的伪随机移动、一个抬起事件组成）即一个滑动操作，但是是直线的，不能拐弯</p>
+</li>
+<li><p><code class="language-markup">--pct-pinchzoom</code> 
+2：二指缩放事件，放大缩小手势操作</p>
+</li>
+<li><p><code class="language-markup">--pct-trackball</code> 
+3：轨迹事件</p>
+</li>
+<li><p><code class="language-markup">--pct-rotation</code> 
+4：屏幕旋转事件</p>
+</li>
+<li><p><code class="language-markup">--pct-permission</code> 
+5: 权限许可事件</p>
+</li>
+<li><p><code class="language-markup">--pct-nav</code> 
+6：基本导航事件</p>
+</li>
+<li><p><code class="language-markup">--pct-majornav</code> 
+7：主要导航事件</p>
+</li>
+<li><p><code class="language-markup">--pct-syskeys</code> 
+8：系统按键事件</p>
+</li>
+<li><p><code class="language-markup">--pct-appswitch</code> 
+9：启动 Activity 事件</p>
+</li>
+<li><p><code class="language-markup">--pct-flip</code> 
+10：键盘事件</p>
+</li>
+<li><p><code class="language-markup">--pct-anyevent</code> 
+11：其他类型事件</p>
+</li>
 </ul>
 <pre class="line-numbers"><code class="lang-bash">#随机种子数，执行事件数量
 :Monkey: seed=1545952923355 count=100
@@ -341,25 +377,7 @@ All rights reserved.</span><span class="footer-modification">
 </span> 人次</span></span></footer>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script>
-var _hmt = _hmt || [];
-(function () {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?921ac157b25b6c9fd562a97abf2806a7";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-(function () {
-  var bp = document.createElement('script');
-  var curProtocol = window.location.protocol.split(':')[0];
-  if (curProtocol === 'https') {
-    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-  }
-  else {
-    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-  }
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(bp, s);
-})();
+
 </script>
                     </section>
                 </div>
