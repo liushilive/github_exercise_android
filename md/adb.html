@@ -84,7 +84,7 @@
 </blockquote>
 <h2 id="anchor_2"><a name="anchor_2" class="anchor-navigation-ex-anchor" href="#anchor_2"><i class="fa fa-link" aria-hidden="true"></i></a>1. adb 的工作方式</h2><p>当你启动一个  <code class="language-markup">adb</code>  客户端，客户端首先确认是否已有一个  <code class="language-markup">adb</code>  服务进程在运行。如果没有，则启动服务进程。当服务器运行，  <code class="language-markup">adb</code>  服务器就会绑定本地的  <code class="language-markup">TCP</code>  端口  <code class="language-markup">5037</code>  并监听  <code class="language-markup">adb</code>  客户端发来的命令，所有的  <code class="language-markup">adb</code>  客户端都是用端口  <code class="language-markup">5037</code>  与  <code class="language-markup">adb</code>  服务器对话的。</p>
 <p>然后，服务器将所有运行中的模拟器或设备实例建立连接。它通过扫描所有  <code class="language-markup">5555</code>  到  <code class="language-markup">5585</code>  范围内的  <code class="language-markup">奇数端口</code>  来定位所有的模拟器或设备（ <code class="language-markup">模拟器 / 设备</code>  使用的范围）。一旦服务器找到了  <code class="language-markup">adb</code>  守护程序，它将建立一个到该端口的连接。请注意任何模拟器或设备实例会取得两个连续的端口——一个 <code class="language-markup">偶数端口</code> 用来响应控制台的连接，和一个  <code class="language-markup">奇数端口</code>  用来响应  <code class="language-markup">adb</code>  连接。比如说：</p>
-<pre class="line-numbers"><code class="lang-bash">模拟器1，控制台：5554
+<pre class="line-numbers"><code class="lang-batch">模拟器1，控制台：5554
 模拟器1，adb：5555
 模拟器2，控制台：5556
 模拟器2，adb：5557

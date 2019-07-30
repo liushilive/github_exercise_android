@@ -93,11 +93,11 @@
 <p>根据选项的冗长程度，你可以看到 Monkey 运行时候产生的报告，这个时候事件已经开始产生。</p>
 <h2 id="anchor_3"><a name="anchor_3" class="anchor-navigation-ex-anchor" href="#anchor_3"><i class="fa fa-link" aria-hidden="true"></i></a>2. Monkey 的基本用法</h2><p>你可以通过命令或者脚本启动 Monkey 。因为 Monkey 运行在模拟器 / 设备里。你需要在这些环境的 shell 里启动它，使用时，在每个命令前加上 adb shell。</p>
 <p>基本语法：</p>
-<pre class="line-numbers"><code class="lang-bash">adb shell monkey [options] &lt;event-count&gt;
+<pre class="line-numbers"><code class="lang-batch">adb shell monkey [options] &lt;event-count&gt;
 </code></pre>
 <p>没有选项指定时， Monkey 安静（没有其它复杂内容）模式启动，然后发送事件给所有安装在你目标扳上的包里。</p>
 <p>这里有一个有代表性的命令，它能启动你的程序并发送 500 个随机的事件给程序。</p>
-<pre class="line-numbers"><code class="lang-bash">adb shell monkey -p io.github.liushilive.at -v 500
+<pre class="line-numbers"><code class="lang-batch">adb shell monkey -p io.github.liushilive.at -v 500
 </code></pre>
 <h2 id="anchor_4"><a name="anchor_4" class="anchor-navigation-ex-anchor" href="#anchor_4"><i class="fa fa-link" aria-hidden="true"></i></a>3. Monkey 压力测试实践</h2><ol>
 <li><p>在手机 <strong>开发者选项</strong> 中，选中 <strong>USB 调试</strong></p>
@@ -145,7 +145,7 @@
 <li><p>触摸事件： <code class="language-markup">adb shell monkey -vvv -p com.android.calculator2 --pct-touch 100 100</code></p>
 </li>
 </ul>
-<h2 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>4. 日志解析</h2><pre class="line-numbers"><code class="lang-bash">adb shell monkey -vvv -p io.github.liushilive.at --pct-touch 1 --pct-motion 2 --pct-pinchzoom 3 --pct-trackball 4 --pct-rotation 5 --pct-permission 6 --pct-nav 7 --pct-majornav 8 --pct-syskeys 9 --pct-appswitch 10 --pct-flip 11 --pct-anyevent 34 --throttle 100 100 &gt; 1.txt 2&gt;&amp;1
+<h2 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>4. 日志解析</h2><pre class="line-numbers"><code class="lang-batch">adb shell monkey -vvv -p io.github.liushilive.at --pct-touch 1 --pct-motion 2 --pct-pinchzoom 3 --pct-trackball 4 --pct-rotation 5 --pct-permission 6 --pct-nav 7 --pct-majornav 8 --pct-syskeys 9 --pct-appswitch 10 --pct-flip 11 --pct-anyevent 34 --throttle 100 100 &gt; 1.txt 2&gt;&amp;1
 </code></pre>
 <h3 id="anchor_6"><a name="anchor_6" class="anchor-navigation-ex-anchor" href="#anchor_6"><i class="fa fa-link" aria-hidden="true"></i></a>4.1. 各事件的百分比</h3><ul>
 <li><p><code class="language-markup">--pct-touch</code> 
@@ -185,14 +185,14 @@
 11：其他类型事件</p>
 </li>
 </ul>
-<pre class="line-numbers"><code class="lang-bash">#随机种子数，执行事件数量
+<pre class="line-numbers"><code class="lang-bash"># 随机种子数，执行事件数量
 :Monkey: seed=1545952923355 count=100
-#运行的应用列表
+# 运行的应用列表
 :AllowPackage: io.github.liushilive.at
-#Category包含：LAUNCHER与MONKEY
+# Category包含：LAUNCHER与MONKEY
 :IncludeCategory: android.intent.category.LAUNCHER
 :IncludeCategory: android.intent.category.MONKEY
-#各事件的百分比
+# 各事件的百分比
 // Event percentages:
 //   0: 1.0%
 //   1: 2.0%
@@ -206,11 +206,11 @@
 //   9: 10.0%
 //   10: 11.0%
 //   11: 34.0%
-#执行的事件流信息
-#启动APP事件
+# 执行的事件流信息
+# 启动APP事件
 :Switch: #Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;launchFlags=0x10200000;component=cc.liushi.testapp/.HomeScreenActivity;end
     // Allowing start of Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=cc.liushi.testapp/.HomeScreenActivity } in package cc.liushi.testapp
-#点击事件
+# 点击事件
 :Sending Touch (ACTION_DOWN): 0:(698.0,306.0)
 :Sending Touch (ACTION_UP): 0:(703.8239,325.90808)
 ....
