@@ -69,14 +69,14 @@
 <p>Android 调试桥 ( <code class="language-markup">adb</code> ) 是多种用途的工具，该工具可以帮助你管理设备或模拟器的状态。</p>
 <p>该工具作为一个客户端 - 服务器程序，包括三个组件：</p>
 <ul>
-<li><p>客户端，该组件发送命令。
-客户端在开发计算机上运行。可以通过发出  <code class="language-markup">adb</code>  命令从命令行终端调用客户端。</p>
+<li><p>客户端，该组件发送命令。</p>
+<p>客户端在开发计算机上运行。可以通过发出  <code class="language-markup">adb</code>  命令从命令行终端调用客户端。</p>
 </li>
-<li><p>后台程序，该组件在设备上运行命令。
-后台程序是每个模拟器或设备实例上作为后台进程运行的守护程序 (daemon)。</p>
+<li><p>后台程序，该组件在设备上运行命令。</p>
+<p>后台程序是每个模拟器或设备实例上作为后台进程运行的守护程序 (daemon)。</p>
 </li>
-<li><p>服务器，该组件管理客户端和后台程序之间的通信。
-服务器在开发计算机上作为后台进程运行。该服务器负责管理客户端与运行于模拟器或设备上的  <code class="language-markup">adb 守护程序</code>  (daemon) 之间的通信。</p>
+<li><p>服务器，该组件管理客户端和后台程序之间的通信。</p>
+<p>服务器在开发计算机上作为后台进程运行。该服务器负责管理客户端与运行于模拟器或设备上的  <code class="language-markup">adb 守护程序</code>  (daemon) 之间的通信。</p>
 </li>
 </ul>
 <p>可以在  <code class="language-markup">android_sdk/platform-tools/</code>  中找到  <code class="language-markup">adb</code>  工具。</p>
@@ -189,11 +189,15 @@ emulator-5554  device
 </code></pre>
 <p>输出格式为  <code class="language-markup">[serialNumber] [state]</code> ，serialNumber 即我们常说的 SN，state 有如下几种：</p>
 <ul>
-<li><p><code class="language-markup">offline</code>  —— 表示设备未连接成功或无响应。</p>
+<li><p><code class="language-markup">offline</code></p>
+<p>表示设备未连接成功或无响应。</p>
 </li>
-<li><p><code class="language-markup">device</code>  —— 设备已连接。注意这个状态并不能标识 Android 系统已经完全启动和可操作，在设备启动过程中设备实例就可连接到 adb，但启动完毕后系统才处于可操作状态。</p>
+<li><p><code class="language-markup">device</code></p>
+<p>设备已连接。</p>
+<p>注意这个状态并不能标识 Android 系统已经完全启动和可操作，在设备启动过程中设备实例就可连接到 adb，但启动完毕后系统才处于可操作状态。</p>
 </li>
-<li><p><code class="language-markup">no device</code>  —— 没有设备 / 模拟器连接。</p>
+<li><p><code class="language-markup">no device</code></p>
+<p>没有设备 / 模拟器连接。</p>
 </li>
 </ul>
 <p>以上输出显示当前已经连接了三台设备 / 模拟器， <code class="language-markup">cf264b8f</code> 、 <code class="language-markup">emulator-5554</code>  和  <code class="language-markup">10.129.164.6:5555</code>  分别是它们的 SN。从  <code class="language-markup">emulator-5554</code>  这个名字可以看出它是一个 Android 模拟器，而  <code class="language-markup">10.129.164.6:5555</code>  这种形为  <code class="language-markup">&lt;IP&gt;:&lt;Port&gt;</code>  的 serialNumber 一般是无线连接的设备或 Genymotion 等第三方 Android 模拟器。</p>
@@ -245,7 +249,7 @@ cf264b8f  offline
 <li><p>断开 USB 连接。</p>
 </li>
 <li><p>找到设备的 IP 地址。</p>
-<p>一般能在「设置」-「关于手机」-「状态信息」-「IP地址」找到，也可以使用下文里 查看设备信息 - IP 地址 一节里的方法用 adb 命令来查看。</p>
+<p>一般能在「设置」-「关于手机」-「状态信息」-「IP 地址」找到，也可以使用下文里 查看设备信息 - IP 地址 一节里的方法用 adb 命令来查看。</p>
 </li>
 <li><p>通过 IP 地址连接设备。</p>
 <pre class="line-numbers"><code class="lang-bash">adb connect &lt;device-ip-address&gt;

@@ -91,12 +91,12 @@
 </li>
 </ol>
 <p>根据选项的冗长程度，你可以看到 Monkey 运行时候产生的报告，这个时候事件已经开始产生。</p>
-<h2 id="anchor_3"><a name="anchor_3" class="anchor-navigation-ex-anchor" href="#anchor_3"><i class="fa fa-link" aria-hidden="true"></i></a>2. Monkey 的基本用法</h2><p>你可以通过命令或者脚本启动 Monkey 。因为 Monkey 运行在模拟器 / 设备里。你需要在这些环境的 shell 里启动它，使用时，在每个命令前加上 adb shell。</p>
+<h2 id="anchor_3"><a name="anchor_3" class="anchor-navigation-ex-anchor" href="#anchor_3"><i class="fa fa-link" aria-hidden="true"></i></a>2. Monkey 的基本用法</h2><p>你可以通过命令或者脚本启动  <code class="language-markup">Monkey</code>  。因为 Monkey 运行在模拟器 / 设备里。你需要在这些环境的 shell 里启动它，使用时，在每个命令前加上  <code class="language-markup">adb shell</code> 。</p>
 <p>基本语法：</p>
 <pre class="line-numbers"><code class="lang-batch">adb shell monkey [options] &lt;event-count&gt;
 </code></pre>
-<p>没有选项指定时， Monkey 安静（没有其它复杂内容）模式启动，然后发送事件给所有安装在你目标扳上的包里。</p>
-<p>这里有一个有代表性的命令，它能启动你的程序并发送 500 个随机的事件给程序。</p>
+<p>没有选项指定时， <code class="language-markup">Monkey</code>  安静（没有其它复杂内容）模式启动，然后发送事件给所有安装在你目标机器上的包里。</p>
+<p>这里有一个有代表性的命令，它能启动你的程序并发送  <code class="language-markup">500</code>  个随机的事件给程序。</p>
 <pre class="line-numbers"><code class="lang-batch">adb shell monkey -p io.github.liushilive.at -v 500
 </code></pre>
 <h2 id="anchor_4"><a name="anchor_4" class="anchor-navigation-ex-anchor" href="#anchor_4"><i class="fa fa-link" aria-hidden="true"></i></a>3. Monkey 压力测试实践</h2><ol>
@@ -114,9 +114,9 @@
 <ol>
 <li><p>程序无响应的情况：搜索关键字  <code class="language-markup">ANR</code></p>
 <ol>
-<li><p>进入 adb shell： <code class="language-markup">adb shell</code></p>
+<li><p>进入  <code class="language-markup">adb shell</code> ： <code class="language-markup">adb shell</code></p>
 </li>
-<li><p>进入 anr 目录： <code class="language-markup">cd data/anr</code></p>
+<li><p>进入  <code class="language-markup">anr</code>  目录： <code class="language-markup">cd data/anr</code></p>
 </li>
 <li><p>查看  <code class="language-markup">traces.txt</code></p>
 </li>
@@ -148,41 +148,42 @@
 <h2 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>4. 日志解析</h2><pre class="line-numbers"><code class="lang-batch">adb shell monkey -vvv -p io.github.liushilive.at --pct-touch 1 --pct-motion 2 --pct-pinchzoom 3 --pct-trackball 4 --pct-rotation 5 --pct-permission 6 --pct-nav 7 --pct-majornav 8 --pct-syskeys 9 --pct-appswitch 10 --pct-flip 11 --pct-anyevent 34 --throttle 100 100 &gt; 1.txt 2&gt;&amp;1
 </code></pre>
 <h3 id="anchor_6"><a name="anchor_6" class="anchor-navigation-ex-anchor" href="#anchor_6"><i class="fa fa-link" aria-hidden="true"></i></a>4.1. 各事件的百分比</h3><ul>
-<li><p><code class="language-markup">--pct-touch</code> 
-0：触摸事件百分比（触摸事件是一个在屏幕单一位置的按下 - 抬起事件）</p>
+<li><p><code class="language-markup">--pct-touch</code></p>
+<p>0：触摸事件百分比（触摸事件是一个在屏幕单一位置的按下 - 抬起事件）</p>
 </li>
-<li><p><code class="language-markup">--pct-motion</code> 
-1：手势事件（手势事件是由一个在屏幕某处的按下事件、一系列的伪随机移动、一个抬起事件组成）即一个滑动操作，但是是直线的，不能拐弯</p>
+<li><p><code class="language-markup">--pct-motion</code></p>
+<p>1：手势事件（手势事件是由一个在屏幕某处的按下事件、一系列的伪随机移动、一个抬起事件组成）即一个滑动操
+作，但是是直线的，不能拐弯</p>
 </li>
-<li><p><code class="language-markup">--pct-pinchzoom</code> 
-2：二指缩放事件，放大缩小手势操作</p>
+<li><p><code class="language-markup">--pct-pinchzoom</code></p>
+<p>2：二指缩放事件，放大缩小手势操作</p>
 </li>
-<li><p><code class="language-markup">--pct-trackball</code> 
-3：轨迹事件</p>
+<li><p><code class="language-markup">--pct-trackball</code></p>
+<p>3：轨迹事件</p>
 </li>
-<li><p><code class="language-markup">--pct-rotation</code> 
-4：屏幕旋转事件</p>
+<li><p><code class="language-markup">--pct-rotation</code></p>
+<p>4：屏幕旋转事件</p>
 </li>
-<li><p><code class="language-markup">--pct-permission</code> 
-5: 权限许可事件</p>
+<li><p><code class="language-markup">--pct-permission</code></p>
+<p>5: 权限许可事件</p>
 </li>
-<li><p><code class="language-markup">--pct-nav</code> 
-6：基本导航事件</p>
+<li><p><code class="language-markup">--pct-nav</code></p>
+<p>6：基本导航事件</p>
 </li>
-<li><p><code class="language-markup">--pct-majornav</code> 
-7：主要导航事件</p>
+<li><p><code class="language-markup">--pct-majornav</code></p>
+<p>7：主要导航事件</p>
 </li>
-<li><p><code class="language-markup">--pct-syskeys</code> 
-8：系统按键事件</p>
+<li><p><code class="language-markup">--pct-syskeys</code></p>
+<p>8：系统按键事件</p>
 </li>
-<li><p><code class="language-markup">--pct-appswitch</code> 
-9：启动 Activity 事件</p>
+<li><p><code class="language-markup">--pct-appswitch</code></p>
+<p>9：启动 Activity 事件</p>
 </li>
-<li><p><code class="language-markup">--pct-flip</code> 
-10：键盘事件</p>
+<li><p><code class="language-markup">--pct-flip</code></p>
+<p>10：键盘事件</p>
 </li>
-<li><p><code class="language-markup">--pct-anyevent</code> 
-11：其他类型事件</p>
+<li><p><code class="language-markup">--pct-anyevent</code></p>
+<p>11：其他类型事件</p>
 </li>
 </ul>
 <pre class="line-numbers"><code class="lang-bash"># 随机种子数，执行事件数量
@@ -243,7 +244,7 @@ Events injected: 437
 <li><p>运行时间：25 小时</p>
 </li>
 <li><p>测试要求：</p>
-<p>1) 运行时间》20 小时</p>
+<p>1) 运行时间  <code class="language-markup">&gt;20</code>  小时</p>
 <p>2) 样机运行时间按从小到大排序，取中间 2 个值，计算平均时间，要求时间中间值平均为 24 小时</p>
 <p>3) 以上两个条件均满足则认为通过测试（运 行过程中无异常）</p>
 </li>
@@ -251,17 +252,17 @@ Events injected: 437
 </li>
 <li><p>单个 APK 运行稳定性测试</p>
 <ul>
-<li><p>测试样机数量：5-10 台</p>
+<li><p>测试样机数量： <code class="language-markup">5-10</code>  台</p>
 </li>
-<li><p>运行时间：25 小时</p>
+<li><p>运行时间： <code class="language-markup">25</code>  小时</p>
 </li>
 <li><p>测试要求：</p>
-<p>平均运行时间至少为 20 小时（&gt;380000 个 ENVENT）, 测试过程中无 ANR、 JAVACRASH、NativeCrash、WindowLeak、 Exceeds VM budget count 等任何异常</p>
+<p>平均运行时间至少为  <code class="language-markup">20</code>  小时（  <code class="language-markup">&gt;380000</code>  个 ENVENT）, 测试过程中无  <code class="language-markup">ANR</code> 、  <code class="language-markup">JAVACRASH</code> 、 <code class="language-markup">NativeCrash</code> 、 <code class="language-markup">WindowLeak</code> 、  <code class="language-markup">Exceeds VM budget count</code>  等任何异常</p>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="anchor_8"><a name="anchor_8" class="anchor-navigation-ex-anchor" href="#anchor_8"><i class="fa fa-link" aria-hidden="true"></i></a>6. 猴运行业内标准</h2><p>最终发布前，Monkey 跑完的总次数应为 25W 次，其结果里不允许有 nullPointException 出现。</p>
+<h2 id="anchor_8"><a name="anchor_8" class="anchor-navigation-ex-anchor" href="#anchor_8"><i class="fa fa-link" aria-hidden="true"></i></a>6. 猴运行业内标准</h2><p>最终发布前，Monkey 跑完的总次数应为  <code class="language-markup">25W</code>  次，其结果里不允许有  <code class="language-markup">nullPointException</code>  出现。</p>
 <h2 id="anchor_9"><a name="anchor_9" class="anchor-navigation-ex-anchor" href="#anchor_9"><i class="fa fa-link" aria-hidden="true"></i></a>7. 命令选项参考</h2><p>下面的表格里列出了所有包含在 Monkey 命令行的参数：</p>
 <table>
     <tr>
