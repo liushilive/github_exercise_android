@@ -102,21 +102,42 @@
 <h2 id="anchor_4"><a name="anchor_4" class="anchor-navigation-ex-anchor" href="#anchor_4"><i class="fa fa-link" aria-hidden="true"></i></a>3. Monkey 压力测试实践</h2><ol>
 <li><p>在手机 <strong>开发者选项</strong> 中，选中 <strong>USB 调试</strong></p>
 </li>
-<li><p>确认手机与电脑连接： <code class="language-markup">adb devices</code></p>
+<li><p>确认手机与电脑连接：</p>
+<pre class="line-numbers"><code class="lang-batch"> adb devices
+</code></pre>
 </li>
-<li><p>安装测试 APP： <code class="language-markup">adb install package.apk</code></p>
+<li><p>安装测试 APP：</p>
+<pre class="line-numbers"><code class="lang-batch"> adb install package.apk
+</code></pre>
 </li>
-<li><p>获取 APP 包名：进入 Shell  <code class="language-markup">adb shell</code> ，筛选日志输出  <code class="language-markup">logcat | grep Displayed</code>  or  <code class="language-markup">adb logcat | findstr START</code></p>
+<li><p>获取 APP 包名，筛选日志输出：</p>
+<pre class="line-numbers"><code class="lang-batch"> abd logcat | findstr Displayed
+</code></pre>
+<p>or</p>
+<pre class="line-numbers"><code class="lang-bash"> abd logcat | grep Displayed
+</code></pre>
+<p>or</p>
+<pre class="line-numbers"><code class="lang-batch"> adb logcat | findstr START
+</code></pre>
+<p>or</p>
+<pre class="line-numbers"><code class="lang-bash"> adb logcat | grep START
+</code></pre>
 </li>
-<li><p>给指定包打压力： <code class="language-markup">adb shell monkey -vvv --throttle 500 -p io.github.liushilive.at 1000 &gt; monkey.txt 2&gt;&amp;1</code></p>
+<li><p>给指定包打压，延迟 500，事件数 1000：</p>
+<pre class="line-numbers"><code class="lang-batch"> adb shell monkey -vvv --throttle 500 -p io.github.liushilive.at 1000 &gt; monkey.txt 2&gt;&amp;1
+</code></pre>
 </li>
 <li><p>分析日志</p>
 <ol>
 <li><p>程序无响应的情况：搜索关键字  <code class="language-markup">ANR</code></p>
 <ol>
-<li><p>查看  <code class="language-markup">traces.txt</code>  文件： <code class="language-markup">adb shell ls -l /data/anr/</code></p>
+<li><p>查看  <code class="language-markup">traces.txt</code>  文件：</p>
+<pre class="line-numbers"><code class="lang-batch"> adb shell ls -l /data/anr/
+</code></pre>
 </li>
-<li><p>提取  <code class="language-markup">traces.txt</code>  文件： <code class="language-markup">adb pull /data/anr/traces.txt</code></p>
+<li><p>提取  <code class="language-markup">traces.txt</code>  文件：</p>
+<pre class="line-numbers"><code class="lang-batch"> adb pull /data/anr/traces.txt
+</code></pre>
 <blockquote><p>部分国产过度定制机器可能无法正常导出  <code class="language-markup">traces.txt</code>  文件，会提示  <code class="language-markup">Permission Denied</code>  或  <code class="language-markup">文件不存在</code>  等信息</p>
 <p>亦可通过  <code class="language-markup">adb bugreport</code>  完成</p>
 </blockquote>
@@ -133,17 +154,11 @@
 </li>
 </ol>
 </li>
-<li><p>重现： <code class="language-markup">adb shell monkey -p io.github.liushilive.at -vvv -s 1546458727792 1000 &gt; monkey1.txt 2&gt;&amp;1</code></p>
+<li><p>重现：</p>
+<pre class="line-numbers"><code class="lang-batch"> adb shell monkey -s 1546458727792 -vvv --throttle 500 -p io.github.liushilive.at 1000 &gt; monkey.txt 2&gt;&amp;1
+</code></pre>
 </li>
 </ol>
-<ul>
-<li><p>加随机数种子： <code class="language-markup">adb shell monkey -vvv -p com.android.calculator2 -s 100 50</code></p>
-</li>
-<li><p>加延迟： <code class="language-markup">adb shell monkey -vvv -p com.android.calculator2 --throttle 1000 10</code></p>
-</li>
-<li><p>触摸事件： <code class="language-markup">adb shell monkey -vvv -p com.android.calculator2 --pct-touch 100 100</code></p>
-</li>
-</ul>
 <h2 id="anchor_5"><a name="anchor_5" class="anchor-navigation-ex-anchor" href="#anchor_5"><i class="fa fa-link" aria-hidden="true"></i></a>4. 日志解析</h2><pre class="line-numbers"><code class="lang-batch">adb shell monkey -vvv -p io.github.liushilive.at --pct-touch 1 --pct-motion 2 --pct-pinchzoom 3 --pct-trackball 4 --pct-rotation 5 --pct-permission 6 --pct-nav 7 --pct-majornav 8 --pct-syskeys 9 --pct-appswitch 10 --pct-flip 11 --pct-anyevent 34 --throttle 100 100 &gt; 1.txt 2&gt;&amp;1
 </code></pre>
 <h3 id="anchor_6"><a name="anchor_6" class="anchor-navigation-ex-anchor" href="#anchor_6"><i class="fa fa-link" aria-hidden="true"></i></a>4.1. 各事件的百分比</h3><ul>
