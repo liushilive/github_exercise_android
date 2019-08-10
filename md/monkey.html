@@ -114,13 +114,12 @@
 <ol>
 <li><p>程序无响应的情况：搜索关键字  <code class="language-markup">ANR</code></p>
 <ol>
-<li><p>进入  <code class="language-markup">adb shell</code> ： <code class="language-markup">adb shell</code></p>
-</li>
-<li><p>进入  <code class="language-markup">anr</code>  目录： <code class="language-markup">cd data/anr</code></p>
-</li>
-<li><p>查看  <code class="language-markup">traces.txt</code></p>
+<li><p>查看  <code class="language-markup">traces.txt</code>  文件： <code class="language-markup">adb shell ls -l /data/anr/</code></p>
 </li>
 <li><p>提取  <code class="language-markup">traces.txt</code>  文件： <code class="language-markup">adb pull /data/anr/traces.txt</code></p>
+<blockquote><p>部分国产过度定制机器可能无法正常导出  <code class="language-markup">traces.txt</code>  文件，会提示  <code class="language-markup">Permission Denied</code>  或  <code class="language-markup">文件不存在</code>  等信息</p>
+<p>亦可通过  <code class="language-markup">adb bugreport</code>  完成</p>
+</blockquote>
 </li>
 </ol>
 </li>
@@ -246,7 +245,7 @@ Events injected: 437
 <li><p>测试要求：</p>
 <p>1) 运行时间  <code class="language-markup">&gt;20</code>  小时</p>
 <p>2) 样机运行时间按从小到大排序，取中间 2 个值，计算平均时间，要求时间中间值平均为 24 小时</p>
-<p>3) 以上两个条件均满足则认为通过测试（运 行过程中无异常）</p>
+<p>3) 以上两个条件均满足则认为通过测试（运行过程中无异常）</p>
 </li>
 </ul>
 </li>
