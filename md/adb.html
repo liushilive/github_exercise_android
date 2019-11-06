@@ -353,7 +353,7 @@ cf264b8f  offline
 </tr>
 </tbody>
 </table>
-<h4 id="anchor_17"><a class="anchor-navigation-ex-anchor" href="#anchor_17" name="anchor_17"><i aria-hidden="true" class="fa fa-link"></i></a>所有应用</h4>
+<h4 id="anchor_17"><a class="anchor-navigation-ex-anchor" href="#anchor_17" name="anchor_17"><i aria-hidden="true" class="fa fa-link"></i></a>5.1.1. 所有应用</h4>
 <p>命令：</p>
 <pre class="line-numbers"><code class="lang-bash">adb shell pm list packages
 </code></pre>
@@ -372,15 +372,15 @@ package:com.android.externalstorage
 // other packages here
 ...
 </code></pre>
-<h4 id="anchor_18"><a class="anchor-navigation-ex-anchor" href="#anchor_18" name="anchor_18"><i aria-hidden="true" class="fa fa-link"></i></a>系统应用</h4>
+<h4 id="anchor_18"><a class="anchor-navigation-ex-anchor" href="#anchor_18" name="anchor_18"><i aria-hidden="true" class="fa fa-link"></i></a>5.1.2. 系统应用</h4>
 <p>命令：</p>
 <pre class="line-numbers"><code class="lang-bash">adb shell pm list packages -s
 </code></pre>
-<h4 id="anchor_19"><a class="anchor-navigation-ex-anchor" href="#anchor_19" name="anchor_19"><i aria-hidden="true" class="fa fa-link"></i></a>第三方应用</h4>
+<h4 id="anchor_19"><a class="anchor-navigation-ex-anchor" href="#anchor_19" name="anchor_19"><i aria-hidden="true" class="fa fa-link"></i></a>5.1.3. 第三方应用</h4>
 <p>命令：</p>
 <pre class="line-numbers"><code class="lang-bash">adb shell pm list packages -3
 </code></pre>
-<h4 id="anchor_20"><a class="anchor-navigation-ex-anchor" href="#anchor_20" name="anchor_20"><i aria-hidden="true" class="fa fa-link"></i></a>包名包含某字符串的应用</h4>
+<h4 id="anchor_20"><a class="anchor-navigation-ex-anchor" href="#anchor_20" name="anchor_20"><i aria-hidden="true" class="fa fa-link"></i></a>5.1.4. 包名包含某字符串的应用</h4>
 <p>比如要查看包名包含字符串 <code class="language-vim">mazhuang</code> 的应用列表，命令：</p>
 <pre class="line-numbers"><code class="lang-bash">adb shell pm list packages mazhuang
 </code></pre>
@@ -1376,7 +1376,7 @@ The commands and default sources are:
 <pre class="line-numbers"><code class="lang-bash">[adb] logcat [&lt;option&gt;] ... [&lt;filter-spec&gt;] ...
 </code></pre>
 <p>常用用法列举如下：</p>
-<h4 id="anchor_50"><a class="anchor-navigation-ex-anchor" href="#anchor_50" name="anchor_50"><i aria-hidden="true" class="fa fa-link"></i></a>按级别过滤日志</h4>
+<h4 id="anchor_50"><a class="anchor-navigation-ex-anchor" href="#anchor_50" name="anchor_50"><i aria-hidden="true" class="fa fa-link"></i></a>9.1.1. 按级别过滤日志</h4>
 <p>Android 的日志分为如下几个优先级（priority）：</p>
 <ul>
 <li>
@@ -1407,13 +1407,13 @@ The commands and default sources are:
 </code></pre>
 <p>会将 Warning、Error、Fatal 和 Silent 日志输出。</p>
 <p>（<strong>注：</strong> 在 macOS 下需要给 <code class="language-vim">*:W</code> 这样以 <code class="language-vim">*</code> 作为 tag 的参数加双引号，如 <code class="language-vim">adb logcat &quot;*:W&quot;</code>，不然会报错 <code class="language-vim">no matches found: *:W</code>。）</p>
-<h4 id="anchor_51"><a class="anchor-navigation-ex-anchor" href="#anchor_51" name="anchor_51"><i aria-hidden="true" class="fa fa-link"></i></a>按 tag 和级别过滤日志</h4>
+<h4 id="anchor_51"><a class="anchor-navigation-ex-anchor" href="#anchor_51" name="anchor_51"><i aria-hidden="true" class="fa fa-link"></i></a>9.1.2. 按 tag 和级别过滤日志</h4>
 <p><code class="language-vim">&lt;filter-spec&gt;</code> 可以由多个 <code class="language-vim">&lt;tag&gt;[:priority]</code> 组成。</p>
 <p>比如，命令：</p>
 <pre class="line-numbers"><code class="lang-bash">adb logcat ActivityManager:I MyApp:D *:S
 </code></pre>
 <p>表示输出 tag <code class="language-vim">ActivityManager</code> 的 Info 以上级别日志，输出 tag <code class="language-vim">MyApp</code> 的 Debug 以上级别日志，及其它 tag 的 Silent 级别日志（即屏蔽其它 tag 日志）。</p>
-<h4 id="anchor_52"><a class="anchor-navigation-ex-anchor" href="#anchor_52" name="anchor_52"><i aria-hidden="true" class="fa fa-link"></i></a>日志格式</h4>
+<h4 id="anchor_52"><a class="anchor-navigation-ex-anchor" href="#anchor_52" name="anchor_52"><i aria-hidden="true" class="fa fa-link"></i></a>9.1.3. 日志格式</h4>
 <p>可以用 <code class="language-vim">adb logcat -v &lt;format&gt;</code> 选项指定日志输出格式。</p>
 <p>日志支持按以下几种 <code class="language-vim">&lt;format&gt;</code>：</p>
 <ul>
@@ -1486,7 +1486,7 @@ Disconnected process message: 10, size: 0
 <p>指定格式可与上面的过滤同时使用。比如：</p>
 <pre class="line-numbers"><code class="lang-bash">adb logcat -v long ActivityManager:I *:S
 </code></pre>
-<h4 id="anchor_53"><a class="anchor-navigation-ex-anchor" href="#anchor_53" name="anchor_53"><i aria-hidden="true" class="fa fa-link"></i></a>清空日志</h4>
+<h4 id="anchor_53"><a class="anchor-navigation-ex-anchor" href="#anchor_53" name="anchor_53"><i aria-hidden="true" class="fa fa-link"></i></a>9.1.4. 清空日志</h4>
 <pre class="line-numbers"><code class="lang-bash">adb logcat -c
 </code></pre>
 <h3 id="anchor_54"><a class="anchor-navigation-ex-anchor" href="#anchor_54" name="anchor_54"><i aria-hidden="true" class="fa fa-link"></i></a>9.2. 内核日志</h3>
