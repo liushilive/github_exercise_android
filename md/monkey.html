@@ -23,7 +23,7 @@
 <link href="" rel="next"/>
 </head>
 <body>
-<div class="book"><div class="book-summary">
+<div class="book match-braces"><div class="book-summary">
     <div id="book-search-input" role="search">
         <input placeholder="输入并搜索" type="text"/>
     </div>
@@ -97,11 +97,11 @@
 <h2 id="anchor_3"><a class="anchor-navigation-ex-anchor" href="#anchor_3" name="anchor_3"><i aria-hidden="true" class="fa fa-link"></i></a>2. Monkey 的基本用法</h2>
 <p>你可以通过命令或者脚本启动 <code class="language-vim">Monkey</code> 。因为 Monkey 运行在模拟器 / 设备里。你需要在这些环境的 shell 里启动它，使用时，在每个命令前加上 <code class="language-vim">adb shell</code>。</p>
 <p>基本语法：</p>
-<pre class="line-numbers"><code class="lang-batch">adb shell monkey [options] &lt;event-count&gt;
+<pre class="line-numbers"><code class="lang-batch rainbow-braces">adb shell monkey [options] &lt;event-count&gt;
 </code></pre>
 <p>没有选项指定时，<code class="language-vim">Monkey</code> 安静（没有其它复杂内容）模式启动，然后发送事件给所有安装在你目标机器上的包里。</p>
 <p>这里有一个有代表性的命令，它能启动你的程序并发送 <code class="language-vim">500</code> 个随机的事件给程序。</p>
-<pre class="line-numbers"><code class="lang-batch">adb shell monkey -p io.github.liushilive.at -v 500
+<pre class="line-numbers"><code class="lang-batch rainbow-braces">adb shell monkey -p io.github.liushilive.at -v 500
 </code></pre>
 <h2 id="anchor_4"><a class="anchor-navigation-ex-anchor" href="#anchor_4" name="anchor_4"><i aria-hidden="true" class="fa fa-link"></i></a>3. Monkey 压力测试实践</h2>
 <ol>
@@ -110,31 +110,31 @@
 </li>
 <li>
 <p>确认手机与电脑连接：</p>
-<pre class="line-numbers"><code class="lang-batch">adb devices
+<pre class="line-numbers"><code class="lang-batch rainbow-braces">adb devices
 </code></pre>
 </li>
 <li>
 <p>安装测试 APP：</p>
-<pre class="line-numbers"><code class="lang-batch">adb install package.apk
+<pre class="line-numbers"><code class="lang-batch rainbow-braces">adb install package.apk
 </code></pre>
 </li>
 <li>
 <p>获取 APP 包名，筛选日志输出：</p>
-<pre class="line-numbers"><code class="lang-batch">abd logcat | findstr Displayed
+<pre class="line-numbers"><code class="lang-batch rainbow-braces">abd logcat | findstr Displayed
 </code></pre>
 <p>or</p>
-<pre class="line-numbers"><code class="lang-bash">abd logcat | grep Displayed
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">abd logcat | grep Displayed
 </code></pre>
 <p>or</p>
-<pre class="line-numbers"><code class="lang-batch">adb logcat | findstr START
+<pre class="line-numbers"><code class="lang-batch rainbow-braces">adb logcat | findstr START
 </code></pre>
 <p>or</p>
-<pre class="line-numbers"><code class="lang-bash">adb logcat | grep START
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">adb logcat | grep START
 </code></pre>
 </li>
 <li>
 <p>给指定包打压，延迟 500，事件数 1000：</p>
-<pre class="line-numbers"><code class="lang-batch">adb shell monkey -vvv --throttle 500 -p io.github.liushilive.at 1000 &gt; monkey.txt 2&gt;&amp;1
+<pre class="line-numbers"><code class="lang-batch rainbow-braces">adb shell monkey -vvv --throttle 500 -p io.github.liushilive.at 1000 &gt; monkey.txt 2&gt;&amp;1
 </code></pre>
 </li>
 <li>
@@ -145,12 +145,12 @@
 <ol>
 <li>
 <p>查看 <code class="language-vim">traces.txt</code> 文件：</p>
-<pre class="line-numbers"><code class="lang-batch">adb shell ls -l /data/anr/
+<pre class="line-numbers"><code class="lang-batch rainbow-braces">adb shell ls -l /data/anr/
 </code></pre>
 </li>
 <li>
 <p>提取 <code class="language-vim">traces.txt</code> 文件：</p>
-<pre class="line-numbers"><code class="lang-batch">adb pull /data/anr/traces.txt
+<pre class="line-numbers"><code class="lang-batch rainbow-braces">adb pull /data/anr/traces.txt
 </code></pre>
 </li>
 </ol>
@@ -175,12 +175,12 @@
 </li>
 <li>
 <p>重现：</p>
-<pre class="line-numbers"><code class="lang-batch">adb shell monkey -s 1546458727792 -vvv --throttle 500 -p io.github.liushilive.at 1000 &gt; monkey.txt 2&gt;&amp;1
+<pre class="line-numbers"><code class="lang-batch rainbow-braces">adb shell monkey -s 1546458727792 -vvv --throttle 500 -p io.github.liushilive.at 1000 &gt; monkey.txt 2&gt;&amp;1
 </code></pre>
 </li>
 </ol>
 <h2 id="anchor_5"><a class="anchor-navigation-ex-anchor" href="#anchor_5" name="anchor_5"><i aria-hidden="true" class="fa fa-link"></i></a>4. 日志解析</h2>
-<pre class="line-numbers"><code class="lang-batch">adb shell monkey -vvv -p io.github.liushilive.at --pct-touch 1 --pct-motion 2 --pct-pinchzoom 3 --pct-trackball 4 --pct-rotation 5 --pct-permission 6 --pct-nav 7 --pct-majornav 8 --pct-syskeys 9 --pct-appswitch 10 --pct-flip 11 --pct-anyevent 34 --throttle 100 100 &gt; 1.txt 2&gt;&amp;1
+<pre class="line-numbers"><code class="lang-batch rainbow-braces">adb shell monkey -vvv -p io.github.liushilive.at --pct-touch 1 --pct-motion 2 --pct-pinchzoom 3 --pct-trackball 4 --pct-rotation 5 --pct-permission 6 --pct-nav 7 --pct-majornav 8 --pct-syskeys 9 --pct-appswitch 10 --pct-flip 11 --pct-anyevent 34 --throttle 100 100 &gt; 1.txt 2&gt;&amp;1
 </code></pre>
 <h3 id="anchor_6"><a class="anchor-navigation-ex-anchor" href="#anchor_6" name="anchor_6"><i aria-hidden="true" class="fa fa-link"></i></a>4.1. 各事件的百分比</h3>
 <ul>
@@ -234,7 +234,7 @@
 <p>11：其他类型事件</p>
 </li>
 </ul>
-<pre class="line-numbers"><code class="lang-vim"># 随机种子数，执行事件数量
+<pre class="line-numbers"><code class="lang-vim rainbow-braces"># 随机种子数，执行事件数量
 :Monkey: seed=1545952923355 count=100
 # 运行的应用列表
 :AllowPackage: io.github.liushilive.at
