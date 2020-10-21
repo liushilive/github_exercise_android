@@ -1135,7 +1135,7 @@ RUNNING_LOW、MODERATE、RUNNING_CRITICAL、COMPLETE</p>
 <pre class="line-numbers"><code class="lang-bash rainbow-braces">adb push &lt;电脑上的文件路径&gt; &lt;设备里的目录&gt;
 </code></pre>
 <p>例：</p>
-<pre class="line-numbers"><code class="lang-bash rainbow-braces">adb push D:/1.png /sdcard/Pictures/
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">adb push D:/1.png /storage/emulated/0/DCIM/Camera/
 </code></pre>
 <p><em>小技巧：</em>设备上的文件路径普通权限可能无法直接写入，如果你的设备已经 root 过，可以先 <code class="language-vim">adb push /path/on/pc /sdcard/filename</code>，然后 <code class="language-vim">adb shell</code> 和 <code class="language-vim">su</code> 在 adb shell 里获取 root 权限后，<code class="language-vim">cp /sdcard/filename /path/on/device</code>。</p>
 <h3 id="anchor_37"><a class="anchor-navigation-ex-anchor" href="#anchor_37" name="anchor_37"><i aria-hidden="true" class="fa fa-link"></i></a>7.2. 复制设备里的文件到电脑</h3>
@@ -1144,7 +1144,7 @@ RUNNING_LOW、MODERATE、RUNNING_CRITICAL、COMPLETE</p>
 </code></pre>
 <p>其中 <code class="language-vim">电脑上的目录</code> 参数可以省略，默认复制到当前目录。</p>
 <p>例：</p>
-<pre class="line-numbers"><code class="lang-bash rainbow-braces">adb pull /sdcard/Pictures/1.png D:/temp/
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">adb push D:/1.png /storage/emulated/0/DCIM/Camera/
 </code></pre>
 <p><em>小技巧：</em>设备上的文件路径可能需要 root 权限才能访问，如果你的设备已经 root 过，可以先使用 <code class="language-vim">adb shell</code> 和 <code class="language-vim">su</code> 命令在 adb shell 里获取 root 权限后，先 <code class="language-vim">cp /path/on/device /sdcard/filename</code> 将文件复制到 sdcard，然后 <code class="language-vim">adb pull /sdcard/filename /path/on/pc</code>。</p>
 <h2 id="anchor_38"><a class="anchor-navigation-ex-anchor" href="#anchor_38" name="anchor_38"><i aria-hidden="true" class="fa fa-link"></i></a>8. 模拟按键 / 输入</h2>
