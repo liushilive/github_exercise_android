@@ -1291,7 +1291,7 @@ RUNNING_LOW、MODERATE、RUNNING_CRITICAL、COMPLETE</p>
 </code></pre>
 <p>其中 <code class="language-vim">电脑上的目录</code> 参数可以省略，默认复制到当前目录。</p>
 <p>例：</p>
-<pre class="line-numbers"><code class="lang-bash rainbow-braces">adb push D:/1.png /storage/emulated/0/DCIM/
+<pre class="line-numbers"><code class="lang-bash rainbow-braces">adb pull /storage/emulated/0/DCIM/ D:/temp
 </code></pre>
 <p><em>小技巧：</em>设备上的文件路径可能需要 root 权限才能访问，如果你的设备已经 root 过，可以先使用 <code class="language-vim">adb shell</code> 和 <code class="language-vim">su</code> 命令在 adb shell 里获取 root 权限后，先 <code class="language-vim">cp /path/on/device /sdcard/filename</code> 将文件复制到 sdcard，然后 <code class="language-vim">adb pull /sdcard/filename /path/on/pc</code>。</p>
 <h2 id="anchor_38">
